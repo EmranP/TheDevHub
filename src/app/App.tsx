@@ -1,12 +1,15 @@
-import iconTest from '@assets/vite.svg'
-import { Home } from '../pages/home/Home'
+import styled from 'styled-components'
+import { HomePage } from '../pages/home/HomePage'
+
+const Title = styled.h1`
+	color: red;
+`
 
 export const App = () => {
 	return (
 		<div>
-			<h1>Test</h1>
-			<Home />
-			<img src={iconTest} alt='' />
+			<Title>Test</Title>
+			<HomePage />
 		</div>
 	)
 }
