@@ -1,5 +1,6 @@
+import { ROLE } from '../../../app/constant/role'
 import { User } from '../../../shared/types/db/user.interface'
-import { AuthorizeResult } from '../types/server'
+import { AuthorizeResult, SessionRolesType } from '../types/server'
 import { addUser } from './add-user'
 import { createSession } from './create-session'
 import { getUser } from './get-user'
@@ -8,7 +9,7 @@ export const server = {
 	async authorize(
 		authLogin: string,
 		authPassword: string
-	): Promise<AuthorizeResult> {
+	): Promise<AuthorizeResult<SessionRolesType>> {
 		try {
 			const user: User | undefined = await getUser(authLogin)
 
@@ -28,7 +29,7 @@ export const server = {
 
 			return {
 				error: null,
-				res: createSession(user.role_id),
+				res: createSession(ROLE.ADMIN),
 			}
 		} catch (error) {
 			if (error instanceof Error) {
@@ -46,9 +47,12 @@ export const server = {
 	async register(
 		regLogin: string,
 		regPassword: string
-	): Promise<AuthorizeResult> {
+	): Promise<AuthorizeResult<SessionRolesType>> {
 		try {
-			const userReg = await getUser(regLogin)
+			const userReg: User | undefined = await getUser(regLogin)
+
+			await addUser(regLogin, regPassword)
+			console.log(userReg)
 
 			if (userReg) {
 				return {
@@ -57,11 +61,9 @@ export const server = {
 				}
 			}
 
-			await addUser(regLogin, regPassword)
-
 			return {
 				error: null,
-				res: createSession(userReg.role_id),
+				res: createSession(ROLE.READER),
 			}
 		} catch (error) {
 			if (error instanceof Error) {

@@ -1,6 +1,6 @@
-export interface AuthorizeResult {
+export interface AuthorizeResult<T> {
 	error: null | string
-	res: SessionRolesType | null
+	res: T | null
 }
 
 export interface InitSession {

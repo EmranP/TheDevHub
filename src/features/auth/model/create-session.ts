@@ -24,7 +24,7 @@ export const createSession = (roleId: number): SessionRolesType => {
 			return { ...session, removeComment } as ModeratorSession
 
 		case ROLE.READER:
-			return { ...session, removeComment } as ReaderSession
+			return session as ReaderSession
 		default:
 			// ничего не делать
 			return session as InitSession
