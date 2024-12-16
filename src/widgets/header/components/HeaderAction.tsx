@@ -1,11 +1,27 @@
-import { FileText, LogOut, StepBack, Users } from 'lucide-react'
+import { FileText, /*LogOut*/ StepBack, Users } from 'lucide-react'
 import { FC } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 
 const HeaderActionStyle = styled.div`
 	display: flex;
 	flex-direction: column;
 	gap: 20px;
+`
+const BlockSignIn = styled.div`
+	margin-top: 30px;
+`
+
+const ButtonSignIn = styled(Link)`
+	padding: 10px 40px;
+	font-size: 20px;
+	color: #fff;
+	background-color: #808080;
+	transition: border-radius 0.3s ease 0s;
+
+	&:hover {
+		border-radius: 10px;
+	}
 `
 
 const HeaderActionAuthStyle = styled.div`
@@ -29,16 +45,31 @@ const HeaderActionAuthSettingStyle = styled.div`
 `
 
 export const HeaderAction: FC = () => {
+	const prevNavigate = useNavigate()
+
+	const movePrevPageHandler = () => prevNavigate(-1)
 	return (
 		<HeaderActionStyle>
-			<HeaderActionAuthStyle>
+			{/* <HeaderActionAuthStyle>
 				<HeaderActionAuthSpanStyle>Emran</HeaderActionAuthSpanStyle>
 				<LogOut width={28} height={26} cursor={'pointer'} />
-			</HeaderActionAuthStyle>
+			</HeaderActionAuthStyle> */}
+			<BlockSignIn>
+				<ButtonSignIn to='login'>Войти</ButtonSignIn>
+			</BlockSignIn>
 			<HeaderActionAuthSettingStyle>
-				<StepBack width={30} height={35} cursor={'pointer'} />
-				<FileText width={30} height={35} cursor={'pointer'} />
-				<Users width={30} height={35} cursor={'pointer'} />
+				<StepBack
+					onClick={movePrevPageHandler}
+					width={30}
+					height={35}
+					cursor={'pointer'}
+				/>
+				<Link to='post'>
+					<FileText color='#1c1c1c' width={30} height={35} cursor={'pointer'} />
+				</Link>
+				<Link to='users'>
+					<Users color='#1c1c1c' width={30} height={35} cursor={'pointer'} />
+				</Link>
 			</HeaderActionAuthSettingStyle>
 		</HeaderActionStyle>
 	)

@@ -14,7 +14,7 @@ export const FooterContact: FC = () => {
 	return (
 		<FooterContactStyled>
 			<FooterCOntactSpanStyle>
-				Блог веб-разработчика web@developer.ru
+				Блог веб-разработчика nightsking12345@gmail.com
 			</FooterCOntactSpanStyle>
 		</FooterContactStyled>
 	)
