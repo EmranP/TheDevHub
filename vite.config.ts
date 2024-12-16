@@ -7,6 +7,7 @@ export default defineConfig({
 	resolve: {
 		alias: {
 			'@assets': '/src/assets',
+			'@styles': '/src/app/styles',
 			// Использую абсолютный путь или путь относительно корня проекта
 		},
 	},
