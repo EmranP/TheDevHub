@@ -1,14 +1,6 @@
 import { FC } from 'react'
-import styled from 'styled-components'
-import { Content } from '../widgets/content/Content'
-import { Footer } from '../widgets/footer/Footer'
-import { Header } from '../widgets/header/Header'
-
-const Wrapper = styled.div`
-	min-height: 100%;
-	overflow: hidden;
-	width: 100%;
-`
+import { Wrapper } from '../shared/ui/Wrapper'
+import { Content, Footer, Header } from '../widgets/index'
 
 export const Blog: FC = () => {
 	return (

@@ -1,18 +1,16 @@
 import { FC } from 'react'
 import { Outlet } from 'react-router-dom'
 import styled from 'styled-components'
-import { Container } from '../../shared/ui/Container'
+import { ComponentPropsType } from '../../shared/types/ui/component-props'
 
-const MainContent = styled.main`
-	padding: 120px 0;
-`
-
-export const Content: FC = () => {
+const ContentContainer: FC<ComponentPropsType> = ({ className }) => {
 	return (
-		<MainContent>
-			<Container>
-				<Outlet />
-			</Container>
-		</MainContent>
+		<main className={className}>
+			<Outlet />
+		</main>
 	)
 }
+
+export const Content = styled(ContentContainer)<ComponentPropsType>`
+	padding: 270px 0;
+`
