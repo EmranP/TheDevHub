@@ -6,6 +6,13 @@
 			"password": "dess2211",
 			"registed_at": "12.12.2025",
 			"role_id": 0
+		},
+		{
+			"id": "002",
+			"login": "React",
+			"password": "tess2211",
+			"registed_at": "21.12.2025",
+			"role_id": 0
 		}
 	],
 	"roles": [

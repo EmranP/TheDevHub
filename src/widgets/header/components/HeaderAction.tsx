@@ -1,27 +1,21 @@
-import { FileText, /*LogOut*/ StepBack, Users } from 'lucide-react'
+import { FileText, LogOut, StepBack, Users } from 'lucide-react'
 import { FC } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
+import { ROLE } from '../../../app/constant/role'
+import { logout } from '../../../entities/user/model/action/user-action'
+import { useAppDispatch, useAppSelector } from '../../../shared/hooks/store'
+import { Button } from '../../../shared/ui/Button'
 
 const HeaderActionStyle = styled.div`
 	display: flex;
 	flex-direction: column;
 	gap: 20px;
 `
-const BlockSignIn = styled.div`
-	margin-top: 30px;
-`
 
 const ButtonSignIn = styled(Link)`
 	padding: 10px 40px;
 	font-size: 20px;
-	color: #fff;
-	background-color: #808080;
-	transition: border-radius 0.3s ease 0s;
-
-	&:hover {
-		border-radius: 10px;
-	}
 `
 
 const HeaderActionAuthStyle = styled.div`
@@ -45,18 +39,41 @@ const HeaderActionAuthSettingStyle = styled.div`
 `
 
 export const HeaderAction: FC = () => {
-	const prevNavigate = useNavigate()
+	const { roleId, id, login, session } = useAppSelector(state => state.user)
+	const dispatch = useAppDispatch()
+	const navigate = useNavigate()
 
-	const movePrevPageHandler = () => prevNavigate(-1)
+	const movePrevPageHandler = () => navigate(-1)
+
+	const logoutHandler = () => {
+		const isUserReady = confirm('Вы увереный что хотить выйти ? :(')
+
+		if (isUserReady) {
+			dispatch(logout(session))
+			navigate('/')
+		}
+
+		return
+	}
+
 	return (
 		<HeaderActionStyle>
-			{/* <HeaderActionAuthStyle>
-				<HeaderActionAuthSpanStyle>Emran</HeaderActionAuthSpanStyle>
-				<LogOut width={28} height={26} cursor={'pointer'} />
-			</HeaderActionAuthStyle> */}
-			<BlockSignIn>
-				<ButtonSignIn to='login'>Войти</ButtonSignIn>
-			</BlockSignIn>
+			{roleId === ROLE.GUEST ? (
+				<Button style={{ marginTop: 10 }}>
+					<ButtonSignIn to='login'>Войти</ButtonSignIn>
+				</Button>
+			) : (
+				<HeaderActionAuthStyle>
+					<HeaderActionAuthSpanStyle>{id && login}</HeaderActionAuthSpanStyle>
+					<LogOut
+						width={28}
+						height={26}
+						cursor={'pointer'}
+						onClick={logoutHandler}
+					/>
+				</HeaderActionAuthStyle>
+			)}
+
 			<HeaderActionAuthSettingStyle>
 				<StepBack
 					onClick={movePrevPageHandler}

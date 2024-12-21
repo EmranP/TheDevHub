@@ -1,10 +1,12 @@
+import { ActionLogout } from '../../../entities/user/types/action'
+
 export interface AuthorizeResult<T> {
 	error: null | string
 	res: T | null
 }
 
 export interface InitSession {
-	logout: () => void
+	logout: (session: SessionRolesType) => ActionLogout
 }
 
 export interface AdminSession extends InitSession {

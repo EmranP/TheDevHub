@@ -1,4 +1,5 @@
 import { FC } from 'react'
+import { Provider } from 'react-redux'
 import {
 	createBrowserRouter,
 	RouterProvider,
@@ -12,6 +13,7 @@ import { CurrentPost } from '../../pages/post/CurrentPost'
 import { Post } from '../../pages/post/Post'
 import { Users } from '../../pages/user/User'
 import { Blog } from '../Blog'
+import { store } from '../store'
 
 const BubbleError: FC = () => {
 	const error = useRouteError()
@@ -74,5 +76,9 @@ const router = createBrowserRouter([
 ])
 
 export const BrowserRouter: FC = () => {
-	return <RouterProvider router={router} />
+	return (
+		<Provider store={store}>
+			<RouterProvider router={router} />
+		</Provider>
+	)
 }

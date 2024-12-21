@@ -25,3 +25,11 @@ a {
   color: #000;
   text-decoration: none;
 }
+
+button {
+  transition: border-radius 0.3s ease 0s;
+
+  &:hover {
+    border-radius: 10px;
+  }
+}
