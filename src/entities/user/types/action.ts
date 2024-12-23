@@ -1,9 +1,12 @@
 import { ActionType } from '../../../app/constant/actions-types'
-import { InitUserStateType } from './user-init.interface'
+import {
+	AuthorizeResultResponseType,
+	SessionRolesType,
+} from '../../../features/auth/types/server'
 
 export interface ActionUserSetSession {
 	type: typeof ActionType.SET_USER
-	payload: InitUserStateType | null
+	payload: SessionRolesType | AuthorizeResultResponseType | null
 }
 
 export interface ActionLogout {

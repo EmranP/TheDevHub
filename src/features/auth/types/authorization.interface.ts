@@ -23,5 +23,5 @@ export interface AuthorizationProps {
 	}: {
 		login: string
 		password: string
-	}) => Promise<ActionRoot> | undefined
+	}) => Promise<ActionRoot | undefined>
 }

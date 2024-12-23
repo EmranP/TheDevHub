@@ -1,19 +1,18 @@
-import { InitUserStateType } from '../../../entities/user/types/user-init.interface'
 import { User } from '../../../shared/types/db/user.interface'
-import { AuthorizeResult, SessionRolesType } from '../types/server'
+import { AuthorizeResult, AuthorizeResultResponseType } from '../types/server'
 import { addUser } from './add-user'
 import { getUser } from './get-user'
 import { sessions } from './sessions'
 
 export const server = {
-	async logout(session: SessionRolesType) {
+	async logout(session: string) {
 		sessions.remove(session)
 	},
 
 	async authorize(
 		authLogin: string,
 		authPassword: string
-	): Promise<AuthorizeResult<InitUserStateType>> {
+	): Promise<AuthorizeResult<AuthorizeResultResponseType>> {
 		const user: User | null = await getUser(authLogin)
 		console.log(user?.role_id)
 
@@ -38,7 +37,7 @@ export const server = {
 			res: {
 				id: id,
 				login: login,
-				roleId: role_id,
+				role_id: role_id,
 				session: sessions.create(user),
 			},
 		}
@@ -46,7 +45,7 @@ export const server = {
 	async register(
 		regLogin: string,
 		regPassword: string
-	): Promise<AuthorizeResult<SessionRolesType>> {
+	): Promise<AuthorizeResult<AuthorizeResultResponseType>> {
 		const existedUser: User | null = await getUser(regLogin)
 
 		if (existedUser) {
@@ -56,14 +55,14 @@ export const server = {
 			}
 		}
 
-		const userReg = await addUser(regLogin, regPassword)
+		const userReg: User = await addUser(regLogin, regPassword)
 
 		return {
 			error: null,
 			res: {
 				id: userReg.id,
 				login: userReg.login,
-				roleId: userReg.role_id,
+				role_id: userReg.role_id,
 				session: sessions.create(userReg),
 			},
 		}

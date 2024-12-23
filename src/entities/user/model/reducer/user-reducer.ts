@@ -6,7 +6,7 @@ import { InitUserStateType } from '../../types/user-init.interface'
 const initialUserState: InitUserStateType = {
 	id: null,
 	login: null,
-	roleId: ROLE.GUEST,
+	role_id: ROLE.GUEST,
 	session: null,
 }
 

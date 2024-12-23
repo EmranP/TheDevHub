@@ -5,7 +5,7 @@ import { appReducer } from '../../shared/store/app-reducer'
 export const rootReducer = combineReducers({
 	app: appReducer,
 	user: userReducer,
-	users: {},
-	posts: {},
-	post: {},
+	users: (state = {}) => state,
+	posts: (state = {}) => state,
+	post: (state = {}) => state,
 })
