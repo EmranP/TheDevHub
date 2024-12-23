@@ -14,7 +14,7 @@ export const server = {
 		authLogin: string,
 		authPassword: string
 	): Promise<AuthorizeResult<InitUserStateType>> {
-		const user: User | undefined = await getUser(authLogin)
+		const user: User | null = await getUser(authLogin)
 		console.log(user?.role_id)
 
 		if (!user) {
@@ -47,16 +47,16 @@ export const server = {
 		regLogin: string,
 		regPassword: string
 	): Promise<AuthorizeResult<SessionRolesType>> {
-		const userReg: User | undefined = await getUser(regLogin)
+		const existedUser: User | null = await getUser(regLogin)
 
-		if (userReg) {
+		if (existedUser) {
 			return {
 				error: 'This is user already busy :(',
 				res: null,
 			}
 		}
 
-		await addUser(regLogin, regPassword)
+		const userReg = await addUser(regLogin, regPassword)
 
 		return {
 			error: null,
@@ -64,7 +64,7 @@ export const server = {
 				id: userReg.id,
 				login: userReg.login,
 				roleId: userReg.role_id,
-				session: sessions.create(user),
+				session: sessions.create(userReg),
 			},
 		}
 	},

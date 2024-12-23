@@ -3,10 +3,14 @@ import styled from 'styled-components'
 import { AuthErrorMessageProps } from '../types/error-message.interface'
 
 const AuthErrorMessageContainer: FC<AuthErrorMessageProps> = ({
-	children,
+	error,
 	className,
 }) => {
-	return <div className={className}>{children}</div>
+	return (
+		<div className={className}>
+			<span>{error}</span>
+		</div>
+	)
 }
 
 export const AuthErrorMessage = styled(AuthErrorMessageContainer)`

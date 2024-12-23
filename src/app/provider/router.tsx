@@ -7,7 +7,7 @@ import {
 } from 'react-router-dom'
 import { NotFoundPage } from '../../pages/404/NotFoundPage'
 import { Login } from '../../pages/auth/login/Login'
-import { Register } from '../../pages/auth/register/Register'
+import { Registration } from '../../pages/auth/register/Registration'
 import { HomePage } from '../../pages/home/HomePage'
 import { CurrentPost } from '../../pages/post/CurrentPost'
 import { Post } from '../../pages/post/Post'
@@ -39,7 +39,7 @@ const router = createBrowserRouter([
 			},
 			{
 				path: 'register',
-				element: <Register />,
+				element: <Registration />,
 				errorElement: <BubbleError />,
 			},
 			{

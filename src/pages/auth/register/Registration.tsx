@@ -11,9 +11,9 @@ import { AuthErrorMessage } from '../../../features/auth/ui/ErrorMessage'
 import { useAppDispatch } from '../../../shared/hooks/store'
 import { Button } from '../../../shared/ui/Button'
 import { Input } from '../../../shared/ui/Input'
-import { authFormSchema } from '../../../utils/authFormSchema'
+import { regFormSchema } from '../../../utils/regFormSchema'
 
-export const Login: FC = () => {
+export const Registration: FC = () => {
 	const dispatch = useAppDispatch()
 	const {
 		register,
@@ -24,18 +24,14 @@ export const Login: FC = () => {
 		defaultValues: {
 			login: '',
 			password: '',
+			passCheck: '',
 		},
-		resolver: yupResolver(authFormSchema),
+		resolver: yupResolver(regFormSchema),
 	})
-
 	const { errorAuth, setErrorAuth } = useAuthErrorMessage('')
 	const navigate = useNavigate()
-	useResetForm({ reset })
 
-	const goToPageRegisterHandle = () => {
-		reset()
-		navigate('/register')
-	}
+	useResetForm({ reset })
 
 	const onSubmitHandler = ({
 		login,
@@ -44,7 +40,7 @@ export const Login: FC = () => {
 		login: string
 		password: string
 	}) =>
-		server.authorize(login, password).then(({ error, res }) => {
+		server.register(login, password).then(({ error, res }) => {
 			if (error) {
 				setErrorAuth(`Ошибка запроса: ${error}`)
 				return
@@ -56,13 +52,16 @@ export const Login: FC = () => {
 			return dispatch(setUser(res))
 		})
 
-	const formError = errors.login?.message || errors.password?.message
+	const formError =
+		errors.login?.message ||
+		errors.password?.message ||
+		errors.passCheck?.message
 	const errorMessage = formError || errorAuth
 
 	return (
 		<div>
 			<Authorization
-				title='Авторизация'
+				title='Регистрация'
 				handleSubmit={handleSubmit}
 				onSubmitHandler={onSubmitHandler}
 			>
@@ -76,13 +75,15 @@ export const Login: FC = () => {
 					placeholder='Пароль...'
 					{...register('password', { onChange: () => setErrorAuth(null) })}
 				/>
+				<Input
+					type='password'
+					placeholder='Проверка пароль...'
+					{...register('passCheck', { onChange: () => setErrorAuth(null) })}
+				/>
 				<Button type='submit' disabled={!!formError}>
-					Авторизоваться
+					Зарегистрироваться
 				</Button>
 				{errorMessage && <AuthErrorMessage error={errorMessage} />}
-				<Button onClick={goToPageRegisterHandle} type='button'>
-					Регистрация
-				</Button>
 			</Authorization>
 		</div>
 	)

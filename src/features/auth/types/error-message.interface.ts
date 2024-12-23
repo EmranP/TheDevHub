@@ -1,6 +1,11 @@
-import { ReactNode } from 'react'
+import { Dispatch, SetStateAction } from 'react'
 
 export interface AuthErrorMessageProps {
 	className?: string
-	children: ReactNode
+	error: string
+}
+
+export interface AuthErrorMessageHookType {
+	errorAuth: string | null
+	setErrorAuth: Dispatch<SetStateAction<string | null>>
 }
