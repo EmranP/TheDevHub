@@ -3,7 +3,7 @@ import { FC } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 import { ROLE } from '../../../app/constant/role'
-import { logout } from '../../../entities/user/model/action/user-action'
+import { logout } from '../../../entities/users/model/action/user-action'
 import { useAppDispatch, useAppSelector } from '../../../shared/hooks/store'
 import { Button } from '../../../shared/ui/Button'
 
@@ -39,7 +39,7 @@ const HeaderActionAuthSettingStyle = styled.div`
 `
 
 export const HeaderAction: FC = () => {
-	const { roleId, id, login, session } = useAppSelector(state => state.user)
+	const { role_id, id, login, session } = useAppSelector(state => state.user)
 	const dispatch = useAppDispatch()
 	const navigate = useNavigate()
 
@@ -58,7 +58,7 @@ export const HeaderAction: FC = () => {
 
 	return (
 		<HeaderActionStyle>
-			{roleId === ROLE.GUEST ? (
+			{role_id === ROLE.GUEST ? (
 				<Button style={{ marginTop: 10 }}>
 					<ButtonSignIn to='login'>Войти</ButtonSignIn>
 				</Button>

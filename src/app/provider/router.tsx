@@ -11,7 +11,7 @@ import { Registration } from '../../pages/auth/register/Registration'
 import { HomePage } from '../../pages/home/HomePage'
 import { CurrentPost } from '../../pages/post/CurrentPost'
 import { Post } from '../../pages/post/Post'
-import { Users } from '../../pages/user/User'
+import { Users } from '../../pages/user/Users'
 import { Blog } from '../Blog'
 import { store } from '../store'
 

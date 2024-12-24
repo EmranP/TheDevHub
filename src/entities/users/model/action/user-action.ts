@@ -13,8 +13,10 @@ export const setUser = (
 	payload: user,
 })
 
-export const logout = (session: string): ActionRootUser => {
-	server.logout(session)
+export const logout = (session: string | null): ActionRootUser => {
+	if (session) {
+		server.logout(session)
+	}
 
 	return { type: ActionType.LOGOUT }
 }

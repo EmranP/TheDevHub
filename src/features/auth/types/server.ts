@@ -1,4 +1,4 @@
-import { ActionLogout } from '../../../entities/user/types/action'
+import { ActionLogout } from '../../../entities/users/types/action'
 import { User } from '../../../shared/types/db/user.interface'
 
 export interface AuthorizeResult<T> {
