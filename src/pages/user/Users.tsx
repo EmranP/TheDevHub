@@ -1,4 +1,5 @@
 import { FC, useEffect, useState } from 'react'
+import { ROLE } from '../../app/constant/role'
 import { fetchUsersMethod } from '../../entities/users/model/api/fetch-users-method'
 import { TableRow } from '../../entities/users/ui/table-row'
 import { UserRow } from '../../entities/users/ui/user-row'
@@ -13,12 +14,20 @@ export const Users: FC = () => {
 	const [users, setUsers] = useState<UserTransform[] | null>([])
 	const [roles, setRoles] = useState<Roles[] | null>([])
 	const [errorMessage, setErrorMessage] = useState<string | null>(null)
+	const [shouldUpdateUserList, setShouldUpdateUserList] =
+		useState<boolean>(false)
 
 	const requestServer = useServerRequest()
 
 	useEffect(() => {
 		fetchUsersMethod(requestServer, setErrorMessage, setUsers, setRoles)
-	}, [requestServer])
+	}, [requestServer, shouldUpdateUserList])
+
+	const userRemoveHandler = (userId: number) => {
+		requestServer('removeUser', userId).then(() => {
+			setShouldUpdateUserList(!shouldUpdateUserList)
+		})
+	}
 
 	return (
 		<Container>
@@ -33,10 +42,12 @@ export const Users: FC = () => {
 					{users?.map(({ id, login, registeredAt, roleId }) => (
 						<UserRow
 							key={id}
+							id={id}
 							login={login}
 							registeredAt={registeredAt}
 							roleId={roleId}
-							roles={roles}
+							roles={roles?.filter(({ id: roleId }) => roleId !== ROLE.GUEST)}
+							userRemoveHandler={() => userRemoveHandler(id)}
 						/>
 					))}
 				</div>

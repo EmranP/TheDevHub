@@ -1,6 +1,6 @@
 import { UserTransform } from '../../../../shared/types/db/index.types'
 import {
-	AuthorizeResult,
+	RequestResult,
 	AuthorizeResultResponseType,
 } from '../../types/operations/server'
 import { addUser, getUser } from '../api'
@@ -9,7 +9,7 @@ import { sessions } from '../sessions'
 export const register = async (
 	regLogin: string,
 	regPassword: string
-): Promise<AuthorizeResult<AuthorizeResultResponseType>> => {
+): Promise<RequestResult<AuthorizeResultResponseType>> => {
 	const existedUser: UserTransform | null = await getUser(regLogin)
 
 	if (existedUser) {

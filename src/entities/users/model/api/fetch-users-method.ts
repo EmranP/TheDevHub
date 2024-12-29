@@ -1,7 +1,7 @@
+import { RequestResult } from '../../../../features/auth/types/operations/server'
 import { Roles } from '../../../../shared/types/db/roles.interface'
-import { User } from '../../../../shared/types/db/user.interface'
+import { UserTransform } from '../../../../shared/types/db/user.interface'
 import {
-	IApiResAccess,
 	TRequestServerHandler,
 	TSetErrorMessageHandler,
 	TSetRolesHandler,
@@ -16,12 +16,12 @@ export const fetchUsersMethod = async (
 ): Promise<void> => {
 	try {
 		const [usersRes, rolesRes]: [
-			IApiResAccess<User[]>,
-			IApiResAccess<Roles[]>
-		] = await Promise.all([
-			requestServer('fetchUsers'),
-			requestServer('fetchRoles'),
-		])
+			RequestResult<UserTransform[]>,
+			RequestResult<Roles[]>
+		] = (await Promise.all([
+			requestServer('fetchUsers', null),
+			requestServer('fetchRoles', null),
+		])) as [RequestResult<UserTransform[]>, RequestResult<Roles[]>]
 
 		if (usersRes.error || rolesRes.error) {
 			setErrorMessage(usersRes.error || rolesRes.error)

@@ -1,12 +1,12 @@
 import { ROLE } from '../../../../app/constant/role'
 import { Roles } from '../../../../shared/types/db/index.types'
-import { AuthorizeResult } from '../../types/operations/server'
+import { RequestResult } from '../../types/operations/server'
 import { getRoles } from '../api'
 import { sessions } from '../sessions'
 
 export const fetchRoles = async (
 	userSession: string | number
-): Promise<AuthorizeResult<Roles[] | undefined>> => {
+): Promise<RequestResult<Roles[] | undefined>> => {
 	const accessRoles = [ROLE.ADMIN]
 
 	if (!sessions.access(userSession, accessRoles)) {
