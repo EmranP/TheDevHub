@@ -9,8 +9,10 @@ export interface InitUserStateType {
 
 export interface UserRowProps {
 	className?: string
+	id: number
 	login: string
 	registeredAt: string
 	roleId: number
-	roles: Roles[] | null
+	roles: Roles[] | undefined
+	userRemoveHandler: () => void
 }

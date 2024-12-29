@@ -1,17 +1,16 @@
 import { Dispatch, SetStateAction } from 'react'
 import { Roles } from '../../../../shared/types/db/roles.interface'
-import { User } from '../../../../shared/types/db/user.interface'
-import { ServerOperation } from '../../../../shared/types/hooks/useServerRequest.type'
-
-export interface IApiResAccess<T> {
-	error: string | null
-	res: T | null
-}
+import { UserTransform } from '../../../../shared/types/db/user.interface'
+import {
+	RequestServerType,
+	ServerOperation,
+	ServerRequestParams,
+} from '../../../../shared/types/hooks/useServerRequest.type'
 
 export type TRequestServerHandler = (
 	operation: ServerOperation,
-	...params: any[]
-) => Promise<IApiResAccess<any[]>>
+	...params: ServerRequestParams
+) => RequestServerType
 export type TSetErrorMessageHandler = Dispatch<SetStateAction<string | null>>
-export type TSetUsersHandler = Dispatch<SetStateAction<User[] | null>>
+export type TSetUsersHandler = Dispatch<SetStateAction<UserTransform[] | null>>
 export type TSetRolesHandler = Dispatch<SetStateAction<Roles[] | null>>

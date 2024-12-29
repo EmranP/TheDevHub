@@ -1,13 +1,17 @@
-import { fetchUsers } from '../../../entities/users/model/operations/fetch-users'
-import { authorize } from './operations/authorize'
-import { fetchRoles } from './operations/fetch-roles'
-import { logout } from './operations/logout'
-import { register } from './operations/register'
+import {
+	fetchUsers,
+	removeUser,
+	updateUserRole,
+} from '../../../entities/users/model/operations'
+import { ServerType } from '../../../shared/types/operation/server.type'
+import { authorize, fetchRoles, logout, register } from './operations'
 
-export const server = {
+export const server: ServerType = {
 	authorize,
 	logout,
 	register,
 	fetchUsers,
 	fetchRoles,
+	updateUserRole,
+	removeUser,
 }

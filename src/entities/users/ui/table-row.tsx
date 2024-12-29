@@ -7,14 +7,12 @@ const TableRowContainer: FC<WrapperPropsType> = ({ className, children }) => (
 )
 
 export const TableRow = styled(TableRowContainer)`
-	display: grid;
-	grid-template-columns: repeat(3, minmax(0, 1fr));
-	grid-template-rows: auto;
-	place-content: space-between;
-	place-items: center;
-
+	display: flex;
+	gap: 5px;
+	padding: 5px;
 	& > div {
-		padding: 0 10px;
+		display: flex;
+		algin-items: center;
 	}
 
 	& .login-column {
@@ -26,6 +24,11 @@ export const TableRow = styled(TableRowContainer)`
 	}
 
 	& .role-column {
+		display: flex;
+		gap: 10px;
 		width: auto;
+		& > select {
+			font-size: 16px;
+		}
 	}
 `

@@ -1,6 +1,6 @@
 import { UserTransform } from '../../../../shared/types/db/index.types'
 import {
-	AuthorizeResult,
+	RequestResult,
 	AuthorizeResultResponseType,
 } from '../../types/operations/server'
 import { getUser } from '../api'
@@ -9,7 +9,7 @@ import { sessions } from '../sessions'
 export const authorize = async (
 	authLogin: string,
 	authPassword: string
-): Promise<AuthorizeResult<AuthorizeResultResponseType>> => {
+): Promise<RequestResult<AuthorizeResultResponseType>> => {
 	const user: UserTransform | null = await getUser(authLogin)
 
 	if (!user) {

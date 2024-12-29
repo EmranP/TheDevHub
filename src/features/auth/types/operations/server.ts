@@ -1,7 +1,7 @@
 import { ROLE } from '../../../../app/constant/role'
 import { UserTransform } from '../../../../shared/types/db/index.types'
 
-export interface AuthorizeResult<T> {
+export interface RequestResult<T> {
 	error: null | string
 	res: T | null
 }
