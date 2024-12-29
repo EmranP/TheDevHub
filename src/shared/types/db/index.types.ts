@@ -1,0 +1,5 @@
+export * from './comments.interface'
+export * from './posts.interface'
+export * from './roles.interface'
+export * from './types'
+export * from './user.interface'

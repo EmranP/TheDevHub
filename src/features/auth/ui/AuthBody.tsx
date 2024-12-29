@@ -1,6 +1,6 @@
 import { FC } from 'react'
-import { AuthBodyProps } from '../types/auth-body.interface'
 import styled from 'styled-components'
+import { AuthBodyProps } from '../types/ui/index.types'
 
 const AuthBodyContainer: FC<AuthBodyProps> = ({ children, className }) => {
 	return <div className={className}>{children}</div>

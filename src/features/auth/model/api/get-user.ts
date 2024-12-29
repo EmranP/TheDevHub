@@ -1,7 +1,10 @@
-import { API_SERVER_USER } from '../../../app/constant/api'
-import { User } from '../../../shared/types/db/user.interface'
+import { API_SERVER_USER } from '../../../../app/constant/api'
+import { transformUser } from '../../../../shared/transformers'
+import { User, UserTransform } from '../../../../shared/types/db/index.types'
 
-export const getUser = async (loginToFind: string): Promise<User | null> => {
+export const getUser = async (
+	loginToFind: string
+): Promise<UserTransform | null> => {
 	try {
 		const response = await fetch(`${API_SERVER_USER}?login=${loginToFind}`)
 
@@ -17,7 +20,9 @@ export const getUser = async (loginToFind: string): Promise<User | null> => {
 			throw new Error('Пользователь не найден или данные некорректны.')
 		}
 
-		return data[0]
+		const [loadedUser] = data
+
+		return transformUser(loadedUser)
 	} catch (error) {
 		if (error instanceof Error) {
 			console.error(`Ошибка: ${error.message}`)

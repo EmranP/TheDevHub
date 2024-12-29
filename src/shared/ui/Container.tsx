@@ -1,6 +1,6 @@
 import { FC } from 'react'
 import styled from 'styled-components'
-import { WrapperPropsType } from '../types/ui/component-props'
+import { WrapperPropsType } from '../types/ui'
 
 const ContainerStyled: FC<WrapperPropsType> = ({ children, className }) => (
 	<div className={className}>{children}</div>

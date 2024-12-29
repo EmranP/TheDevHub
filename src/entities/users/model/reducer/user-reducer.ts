@@ -1,12 +1,12 @@
 import { ActionType } from '../../../../app/constant/actions-types'
 import { ROLE } from '../../../../app/constant/role'
 import { ActionRoot } from '../../../../shared/types/store/action-root'
-import { InitUserStateType } from '../../types/user-init.interface'
+import { InitUserStateType } from '../../types/ui/user-row.interface'
 
 const initialUserState: InitUserStateType = {
 	id: null,
 	login: null,
-	role_id: ROLE.GUEST,
+	roleId: ROLE.GUEST,
 	session: null,
 }
 

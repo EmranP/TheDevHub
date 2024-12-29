@@ -2,6 +2,11 @@ export interface User {
 	id: number
 	login: string
 	password: string
-	registed_at: string
+	registered_at: string
 	role_id: number
+}
+
+export interface UserTransform extends Omit<User, 'registered_at' | 'role_id'> {
+	registeredAt: string
+	roleId: number
 }

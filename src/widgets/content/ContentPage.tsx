@@ -1,7 +1,7 @@
 import { FC } from 'react'
 import { Outlet } from 'react-router-dom'
 import styled from 'styled-components'
-import { ComponentPropsType } from '../../shared/types/ui/component-props'
+import { ComponentPropsType } from '../../shared/types/ui'
 
 const ContentContainer: FC<ComponentPropsType> = ({ className }) => {
 	return (
@@ -11,6 +11,6 @@ const ContentContainer: FC<ComponentPropsType> = ({ className }) => {
 	)
 }
 
-export const Content = styled(ContentContainer)<ComponentPropsType>`
+export const ContentPage = styled(ContentContainer)<ComponentPropsType>`
 	padding: 270px 0;
 `

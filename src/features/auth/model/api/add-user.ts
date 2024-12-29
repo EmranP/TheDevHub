@@ -1,5 +1,5 @@
-import { API_SERVER_USER } from '../../../app/constant/api'
-import { generateData } from '../../../utils/generateData'
+import { API_SERVER_USER } from '../../../../app/constant/api'
+import { generateDate } from '../../../../utils'
 
 export const addUser = (login: string, password: string) =>
 	fetch(API_SERVER_USER, {
@@ -10,7 +10,7 @@ export const addUser = (login: string, password: string) =>
 		body: JSON.stringify({
 			login,
 			password,
-			registed_at: generateData(),
+			registered_at: generateDate(),
 			role_id: 2,
 		}),
 	}).then(createUser => createUser.json())

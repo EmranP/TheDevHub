@@ -1,8 +1,7 @@
 import { FC } from 'react'
 import styled from 'styled-components'
-import { Container } from '../../shared/ui/Container'
-import { Title } from '../../shared/ui/Title'
-import { AuthorizationProps } from './types/authorization.interface'
+import { Container, Title } from '../../shared/ui'
+import { AuthorizationProps } from './types/operations/authorization.interface'
 import { AuthBody } from './ui/AuthBody'
 
 export const Authorization: FC<AuthorizationProps> = ({

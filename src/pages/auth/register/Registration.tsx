@@ -6,7 +6,7 @@ import { setUser } from '../../../entities/users/model/action/user-action'
 import { Authorization } from '../../../features/auth'
 import { useAuthErrorMessage } from '../../../features/auth/hook/useErrorMessage'
 import { useResetForm } from '../../../features/auth/hook/useResetForm'
-import { server } from '../../../features/auth/model/server'
+import { server } from '../../../features/auth/model'
 import { AuthErrorMessage } from '../../../features/auth/ui/ErrorMessage'
 import { useAppDispatch } from '../../../shared/hooks/store'
 import { Button } from '../../../shared/ui/Button'
@@ -59,32 +59,30 @@ export const Registration: FC = () => {
 	const errorMessage = formError || errorAuth
 
 	return (
-		<div>
-			<Authorization
-				title='Регистрация'
-				handleSubmit={handleSubmit}
-				onSubmitHandler={onSubmitHandler}
-			>
-				<Input
-					type='text'
-					placeholder='Логин...'
-					{...register('login', { onChange: () => setErrorAuth(null) })}
-				/>
-				<Input
-					type='password'
-					placeholder='Пароль...'
-					{...register('password', { onChange: () => setErrorAuth(null) })}
-				/>
-				<Input
-					type='password'
-					placeholder='Проверка пароль...'
-					{...register('passCheck', { onChange: () => setErrorAuth(null) })}
-				/>
-				<Button type='submit' disabled={!!formError}>
-					Зарегистрироваться
-				</Button>
-				{errorMessage && <AuthErrorMessage error={errorMessage} />}
-			</Authorization>
-		</div>
+		<Authorization
+			title='Регистрация'
+			handleSubmit={handleSubmit}
+			onSubmitHandler={onSubmitHandler}
+		>
+			<Input
+				type='text'
+				placeholder='Логин...'
+				{...register('login', { onChange: () => setErrorAuth(null) })}
+			/>
+			<Input
+				type='password'
+				placeholder='Пароль...'
+				{...register('password', { onChange: () => setErrorAuth(null) })}
+			/>
+			<Input
+				type='password'
+				placeholder='Проверка пароль...'
+				{...register('passCheck', { onChange: () => setErrorAuth(null) })}
+			/>
+			<Button type='submit' disabled={!!formError}>
+				Зарегистрироваться
+			</Button>
+			{errorMessage && <AuthErrorMessage error={errorMessage} />}
+		</Authorization>
 	)
 }

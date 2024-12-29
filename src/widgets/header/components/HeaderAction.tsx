@@ -39,7 +39,7 @@ const HeaderActionAuthSettingStyle = styled.div`
 `
 
 export const HeaderAction: FC = () => {
-	const { role_id, id, login, session } = useAppSelector(state => state.user)
+	const { roleId, id, login, session } = useAppSelector(state => state.user)
 	const dispatch = useAppDispatch()
 	const navigate = useNavigate()
 
@@ -58,7 +58,7 @@ export const HeaderAction: FC = () => {
 
 	return (
 		<HeaderActionStyle>
-			{role_id === ROLE.GUEST ? (
+			{roleId === ROLE.GUEST ? (
 				<Button style={{ marginTop: 10 }}>
 					<ButtonSignIn to='login'>Войти</ButtonSignIn>
 				</Button>

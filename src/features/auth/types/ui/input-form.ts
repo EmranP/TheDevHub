@@ -7,5 +7,5 @@ export type InputProps = Omit<
 > &
 	Partial<UseFormRegisterReturn> & {
 		className?: string
-		width?: string | number // Добавляем width для styled-components
+		width?: string | number
 	}

@@ -1,6 +1,6 @@
 import { FC } from 'react'
 import styled from 'styled-components'
-import { AuthErrorMessageProps } from '../types/error-message.interface'
+import { AuthErrorMessageProps } from '../types/ui/index.types'
 
 const AuthErrorMessageContainer: FC<AuthErrorMessageProps> = ({
 	error,

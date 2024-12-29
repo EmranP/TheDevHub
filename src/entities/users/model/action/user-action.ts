@@ -1,13 +1,10 @@
 import { ActionType } from '../../../../app/constant/actions-types'
 import { server } from '../../../../features/auth/model/server'
-import {
-	AuthorizeResultResponseType,
-	SessionRolesType,
-} from '../../../../features/auth/types/server'
-import { ActionRootUser } from '../../types/action'
+import { AuthorizeResultResponseType } from '../../../../features/auth/types/operations/server'
+import { ActionRootUser } from '../../types/actions/action'
 
 export const setUser = (
-	user: SessionRolesType | AuthorizeResultResponseType | null
+	user: AuthorizeResultResponseType | null
 ): ActionRootUser => ({
 	type: ActionType.SET_USER,
 	payload: user,

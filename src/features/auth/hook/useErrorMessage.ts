@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { AuthErrorMessageHookType } from '../types/error-message.interface'
+import { AuthErrorMessageHookType } from '../types/ui/index.types'
 
 export const useAuthErrorMessage = (
 	initialValue: string | null
