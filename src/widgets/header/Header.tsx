@@ -1,9 +1,7 @@
 import { FC } from 'react'
 import styled from 'styled-components'
-import { ComponentPropsType } from '../../shared/types/ui/component-props'
-import { HeaderAbout } from './components/HeaderAbout'
-import { HeaderAction } from './components/HeaderAction'
-import { Logo } from './components/Logo'
+import { ComponentPropsType } from '../../shared/types/ui'
+import { HeaderAbout, HeaderAction, Logo } from './components'
 
 const HeaderContainer: FC<ComponentPropsType> = ({ className }) => {
 	return (

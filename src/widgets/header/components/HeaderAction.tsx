@@ -3,7 +3,7 @@ import { FC } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 import { ROLE } from '../../../app/constant/role'
-import { logout } from '../../../entities/user/model/action/user-action'
+import { logout } from '../../../entities/users/model/action/user-action'
 import { useAppDispatch, useAppSelector } from '../../../shared/hooks/store'
 import { Button } from '../../../shared/ui/Button'
 

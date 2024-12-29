@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { useAppStore } from '../../../shared/hooks/store'
-import { LogoutProps } from '../types/use-reset-form'
+import { LogoutProps } from '../types/ui/index.types'
 
 export const useResetForm = ({ reset }: LogoutProps) => {
 	const store = useAppStore()

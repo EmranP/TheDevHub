@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { FC } from 'react'
 import styled from 'styled-components'
-import { ButtonProps } from '../types/ui/button.interface'
+import { ButtonProps } from '../types/ui'
 
 const ButtonStyled: FC<ButtonProps> = ({
 	children,

@@ -1,8 +1,7 @@
 import { FC } from 'react'
 import styled from 'styled-components'
-import { ComponentPropsType } from '../../shared/types/ui/component-props'
-import { FooterContact } from './components/FooterContact'
-import { FooterDate } from './components/FooterData'
+import { ComponentPropsType } from '../../shared/types/ui'
+import { FooterContact, FooterDate } from './components'
 
 export const FooterContainer: FC<ComponentPropsType> = ({ className }) => {
 	return (

@@ -1,12 +1,12 @@
 import { FC } from 'react'
 import { Wrapper } from '../shared/ui/Wrapper'
-import { Content, Footer, Header } from '../widgets/index'
+import { ContentPage, Footer, Header } from '../widgets/index'
 
 export const Blog: FC = () => {
 	return (
 		<Wrapper>
 			<Header />
-			<Content />
+			<ContentPage />
 			<Footer />
 		</Wrapper>
 	)
