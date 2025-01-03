@@ -12,7 +12,7 @@ const ContentContainerUI: FC<ComponentContentPropsType> = ({
 		<>
 			{error ? (
 				<div className={className}>
-					<Title title='Ошибка' />
+					<Title textAlgin={true} title='Ошибка' />
 					<div>{error}</div>
 				</div>
 			) : (

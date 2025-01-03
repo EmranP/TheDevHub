@@ -4,12 +4,14 @@ import { RequestResult } from '../../../../features/auth/types/operations/server
 import { deleteUser } from '../api/delete-user'
 
 export const removeUser = async (
-	userSession: string | number,
+	hash: string | number,
 	userId: string
 ): Promise<RequestResult<boolean>> => {
 	const accessRoles = [ROLE.ADMIN]
 
-	if (!sessions.access(userSession, accessRoles)) {
+	const access = await sessions.access(hash, accessRoles)
+
+	if (!access) {
 		return {
 			error: 'Доступ запрещён',
 			res: null,

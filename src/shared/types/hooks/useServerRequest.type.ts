@@ -1,4 +1,3 @@
-import { UserTransform } from '../db/user.interface'
 import {
 	RequestServerAuthorizeType,
 	RequestServerFetchRolesType,
@@ -17,6 +16,9 @@ export type ServerOperation =
 	| 'authorize'
 	| 'updateUserRole'
 	| 'removeUser'
+	| 'fetchPost'
+	| 'addComment'
+	| 'removeComment'
 
 export type RequestServerType =
 	| RequestServerAuthorizeType
@@ -27,8 +29,4 @@ export type RequestServerType =
 	| RequestServerUpdateUserRoleType
 	| RequestServerRemoveUserType
 
-export type ServerRequestParams =
-	| [string | number]
-	| [UserTransform]
-	| [null]
-	| [string, ...(string | number | null)[]]
+export type ServerRequestParams = [...Array<string | number | null>]

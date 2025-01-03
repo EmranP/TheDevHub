@@ -13,7 +13,7 @@ export const Authorization: FC<AuthorizationProps> = ({
 	return (
 		<Container>
 			<AuthCenter>
-				<Title title={title} />
+				<Title textAlign={'center'} title={title} />
 				<form onSubmit={handleSubmit(onSubmitHandler)}>
 					<AuthBody>{children}</AuthBody>
 				</form>

@@ -53,7 +53,7 @@ const router = createBrowserRouter([
 				errorElement: <BubbleError />,
 			},
 			{
-				path: 'post/:postId',
+				path: 'post/:id',
 				element: <CurrentPost />,
 				errorElement: <BubbleError />,
 			},

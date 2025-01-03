@@ -49,6 +49,7 @@ export const HeaderAction: FC = () => {
 		const isUserReady = confirm('Вы увереный что хотить выйти ? :(')
 
 		if (isUserReady) {
+			sessionStorage.removeItem('userData')
 			dispatch(logout(session))
 			navigate('/')
 		}

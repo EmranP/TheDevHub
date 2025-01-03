@@ -5,11 +5,13 @@ import { UserTransform } from '../../../../shared/types/db/index.types'
 import { getUsers } from '../api/get-users'
 
 export const fetchUsers = async (
-	userSession: string | number
+	hash: string | number
 ): Promise<RequestResult<UserTransform[] | undefined>> => {
 	const accessRoles = [ROLE.ADMIN]
 
-	if (!sessions.access(userSession, accessRoles)) {
+	const access = await sessions.access(hash, accessRoles)
+
+	if (!access) {
 		return {
 			error: 'Доступ запрещён',
 			res: null,

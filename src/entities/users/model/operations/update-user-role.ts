@@ -4,13 +4,15 @@ import { RequestResult } from '../../../../features/auth/types/operations/server
 import { setUserRole } from '../api/set-user-role'
 
 export const updateUserRole = async (
-	userSession: string | number,
+	hash: string | number,
 	userId: string,
 	newUserRoleId: number
 ): Promise<RequestResult<boolean>> => {
 	const accessRoles = [ROLE.ADMIN]
 
-	if (!sessions.access(userSession, accessRoles)) {
+	const access = await sessions.access(hash, accessRoles)
+
+	if (!access) {
 		return {
 			error: 'Доступ запрещён',
 			res: null,

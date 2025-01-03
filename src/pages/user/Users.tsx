@@ -32,7 +32,7 @@ export const Users: FC = () => {
 	return (
 		<Container>
 			<Content error={errorMessage}>
-				<Title title='Пользователи' />
+				<Title textAlign={'center'} title='Пользователи' />
 				<div className='table'>
 					<TableRow>
 						<div className='login-column'>Логин</div>
