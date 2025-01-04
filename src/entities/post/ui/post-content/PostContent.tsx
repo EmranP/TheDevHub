@@ -1,26 +1,23 @@
-import { Calendar, SquarePen, Trash } from 'lucide-react'
+import { SquarePen } from 'lucide-react'
 import { FC } from 'react'
+import { Link } from 'react-router-dom'
 import styled from 'styled-components'
+import { SpecialPanel } from '../../../../features/post/ui/SpecialPanel'
 import { Title } from '../../../../shared/ui'
 
 const PostContentContainer: FC = ({
 	className,
-	post: { id, title, imageUrl, content, publishedAt },
+	post: { title, imageUrl, content, publishedAt },
 }) => {
 	return (
 		<div className={className}>
 			<img src={imageUrl} alt={title} />
 			<Title title={title} />
-			<div className='special-panel'>
-				<div className='published-at'>
-					<Calendar size={22} />
-					{publishedAt}
-				</div>
-				<div className='buttons'>
-					<Trash size={22} cursor={'pointer'} />
+			<SpecialPanel publishedAt={publishedAt} margin='-20px 0 20px'>
+				<Link to={'edit'}>
 					<SquarePen size={22} cursor={'pointer'} />
-				</div>
-			</div>
+				</Link>
+			</SpecialPanel>
 			<div className='post-text'>{content}</div>
 		</div>
 	)
@@ -34,25 +31,8 @@ export const PostContent = styled(PostContentContainer)`
 		margin: 0 20px 10px 0px;
 	}
 
-	& .special-panel {
-		display: flex;
-		justify-content: space-between;
-		margin: -20px 0 20px;
-		font-size: 18px;
-	}
-
-	& .published-at {
-		display: flex;
-		align-items: center;
-		gap: 10px;
-	}
-
-	& .buttons {
-		display: flex;
-		gap: 10px;
-	}
-
 	& .post-text {
 		font-size: 18px;
+		white-space: pre-line;
 	}
 `

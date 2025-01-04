@@ -19,6 +19,7 @@ export type ServerOperation =
 	| 'fetchPost'
 	| 'addComment'
 	| 'removeComment'
+	| 'savePost'
 
 export type RequestServerType =
 	| RequestServerAuthorizeType
