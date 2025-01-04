@@ -9,8 +9,9 @@ import { NotFoundPage } from '../../pages/404/NotFoundPage'
 import { Login } from '../../pages/auth/login/Login'
 import { Registration } from '../../pages/auth/register/Registration'
 import { HomePage } from '../../pages/home/HomePage'
-import { CurrentPost } from '../../pages/post/CurrentPost'
 import { Post } from '../../pages/post/Post'
+import { PostForm } from '../../pages/post/PostForm'
+import { Posts } from '../../pages/post/Posts'
 import { Users } from '../../pages/user/Users'
 import { Blog } from '../Blog'
 import { store } from '../store'
@@ -49,13 +50,20 @@ const router = createBrowserRouter([
 			},
 			{
 				path: 'post',
-				element: <Post />,
+				element: <Posts />,
 				errorElement: <BubbleError />,
 			},
 			{
-				path: 'post/:postId',
-				element: <CurrentPost />,
+				path: 'post/:id',
+				element: <Post />,
 				errorElement: <BubbleError />,
+				children: [
+					{
+						path: 'edit',
+						element: <PostForm />,
+						errorElement: <BubbleError />,
+					},
+				],
 			},
 			// Page 404
 			{

@@ -49,7 +49,8 @@ export const Registration: FC = () => {
 			reset()
 			navigate('/')
 
-			return dispatch(setUser(res))
+			dispatch(setUser(res))
+			return sessionStorage.setItem('userData', JSON.stringify(res))
 		})
 
 	const formError =

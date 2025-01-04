@@ -6,12 +6,12 @@ import { setUser } from '../../../entities/users/model/action/user-action'
 import { Authorization } from '../../../features/auth'
 import { useAuthErrorMessage } from '../../../features/auth/hook/useErrorMessage'
 import { useResetForm } from '../../../features/auth/hook/useResetForm'
+import { server } from '../../../features/auth/model'
 import { AuthErrorMessage } from '../../../features/auth/ui/ErrorMessage'
 import { useAppDispatch } from '../../../shared/hooks/store'
 import { Button } from '../../../shared/ui/Button'
 import { Input } from '../../../shared/ui/Input'
 import { authFormSchema } from '../../../utils/authFormSchema'
-import { server } from '../../../features/auth/model'
 
 export const Login: FC = () => {
 	const dispatch = useAppDispatch()
@@ -53,7 +53,8 @@ export const Login: FC = () => {
 			reset()
 			navigate('/')
 
-			return dispatch(setUser(res))
+			dispatch(setUser(res))
+			return sessionStorage.setItem('userData', JSON.stringify(res))
 		})
 
 	const formError = errors.login?.message || errors.password?.message

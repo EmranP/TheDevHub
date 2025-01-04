@@ -12,5 +12,5 @@ const ContentContainer: FC<ComponentPropsType> = ({ className }) => {
 }
 
 export const ContentPage = styled(ContentContainer)<ComponentPropsType>`
-	padding: 270px 0;
+	padding: 270px 0 20px;
 `

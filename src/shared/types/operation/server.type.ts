@@ -1,7 +1,8 @@
 import {
-	RequestResult,
 	AuthorizeResultResponseType,
+	RequestResult,
 } from '../../../features/auth/types/operations/server'
+import { IPostTransform } from '../db/posts.interface'
 import { Roles } from '../db/roles.interface'
 import { UserTransform } from '../db/user.interface'
 
@@ -30,4 +31,7 @@ export interface ServerType {
 		userSession: string | number,
 		userId: string
 	) => Promise<RequestResult<boolean>>
+	fetchPost: (
+		postId: string | number
+	) => Promise<RequestResult<IPostTransform | null>>
 }

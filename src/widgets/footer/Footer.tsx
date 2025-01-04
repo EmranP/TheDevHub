@@ -13,9 +13,6 @@ export const FooterContainer: FC<ComponentPropsType> = ({ className }) => {
 }
 
 export const Footer = styled(FooterContainer)<ComponentPropsType>`
-	position: fixed;
-	bottom: 0;
-	width: 1200px;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;

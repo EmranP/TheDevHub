@@ -7,10 +7,9 @@ export interface RequestResult<T> {
 }
 
 export interface AuthorizationSessionResponseProps {
-	list: Record<string, UserTransform>
 	create: (user: UserTransform) => string
 	remove: (hash: string | number) => void
-	access: (hash: string | number, accessRoles: ROLE[]) => boolean
+	access: (hash: string | number, accessRoles: ROLE[]) => Promise<boolean>
 }
 
 export type AuthorizeResultResponseType = Omit<
