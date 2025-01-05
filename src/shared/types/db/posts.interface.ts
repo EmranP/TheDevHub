@@ -1,9 +1,9 @@
 export interface IPostData {
 	id: number | string
 	title: string
-	image_url: string
+	imageUrl: string
 	content: string
-	published_at: string
+	publishedAt: string
 	comments: []
 }
 

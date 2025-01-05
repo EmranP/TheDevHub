@@ -5,4 +5,6 @@ export const savePostAsync =
 	(requestServer: TRequestServerHandler, savePostData) => dispatch =>
 		requestServer('savePost', savePostData).then(updatedPost => {
 			dispatch(setPostData(updatedPost.res))
+
+			return updatedPost.res
 		})

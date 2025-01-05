@@ -5,9 +5,9 @@ import { ActionRoot } from '../../../../shared/types/store/action-root'
 const initialPostState: IPostData = {
 	id: '',
 	title: '',
-	image_url: '',
+	imageUrl: '',
 	content: '',
-	published_at: '',
+	publishedAt: '',
 	comments: [],
 }
 
@@ -18,7 +18,8 @@ export const postReducer = (
 	switch (action.type) {
 		case ActionType.SET_POST_DATA:
 			return { ...state, ...action.payload }
-
+		case ActionType.RESET_POST_DATA:
+			return initialPostState
 		default:
 			return state
 	}

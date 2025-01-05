@@ -1,6 +1,7 @@
 import { ROLE } from '../../../../../app/constant/role'
 import { sessions } from '../../../../auth/model/sessions'
-import { updatePost } from '../api/updatePost'
+import { createPost } from '../../../create-post/index.export'
+import { updatePost } from '../api/update-post'
 
 export const savePost = async (hash: string | number, newPostData) => {
 	const accessRoles = [ROLE.ADMIN]
@@ -14,10 +15,13 @@ export const savePost = async (hash: string | number, newPostData) => {
 		}
 	}
 
-	const updatedPost = await updatePost(newPostData)
+	const savedPost =
+		newPostData.id === ''
+			? await createPost(newPostData)
+			: await updatePost(newPostData)
 
 	return {
 		error: null,
-		res: updatedPost,
+		res: savedPost,
 	}
 }
