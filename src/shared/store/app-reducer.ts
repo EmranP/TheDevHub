@@ -1,7 +1,8 @@
 import { ActionType } from '../../app/constant/actions-types'
 import { ActionRoot } from '../types/store/action-root'
+import { InitAppStateInterface } from '../types/store/app-state.interface'
 
-const initialAppState = {
+const initialAppState: InitAppStateInterface = {
 	wasLogout: false,
 	modal: {
 		isOpen: false,
@@ -11,7 +12,10 @@ const initialAppState = {
 	},
 }
 
-export const appReducer = (state = initialAppState, action: ActionRoot) => {
+export const appReducer = (
+	state = initialAppState,
+	action: ActionRoot
+): InitAppStateInterface => {
 	switch (action.type) {
 		case ActionType.LOGOUT:
 			return {

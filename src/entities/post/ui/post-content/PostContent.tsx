@@ -4,16 +4,17 @@ import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import { SpecialPanel } from '../../../../features/post/ui/SpecialPanel'
 import { Title } from '../../../../shared/ui'
+import { IComponentPostFormProps } from '../../types/ui/post-ui.interface'
 
-const PostContentContainer: FC = ({
+const PostContentContainer: FC<IComponentPostFormProps> = ({
 	className,
-	post: { title, imageUrl, content, publishedAt },
+	post: { id, title, imageUrl, content, publishedAt },
 }) => {
 	return (
 		<div className={className}>
 			<img src={imageUrl} alt={title} />
 			<Title title={title} />
-			<SpecialPanel publishedAt={publishedAt} margin='-20px 0 20px'>
+			<SpecialPanel id={id} publishedAt={publishedAt} margin='-20px 0 20px'>
 				<Link to={'edit'}>
 					<SquarePen size={22} cursor={'pointer'} />
 				</Link>

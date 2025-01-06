@@ -1,14 +1,36 @@
+export interface ICommentPostData {
+	authorId: string
+	postId: string
+	publishedAt: string
+	content: string
+	id: number | string
+}
+
+export interface InitCommentPostInterface
+	extends Omit<ICommentPostData, 'authorId' | 'postId' | 'publishedAt'> {
+	author_id: string
+	post_id: string
+	published_at: string
+}
+
 export interface IPostData {
 	id: number | string
 	title: string
-	image_url: string
+	imageUrl: string
 	content: string
-	published_at: string
-	comments: []
+	publishedAt: string
+	comments: ICommentPostData[]
 }
 
-export interface IPostTransform
-	extends Omit<IPostData, 'image_url' | 'published_at'> {
-	imageUrl: string
-	publishedAt: string
+export interface IPostDataResponseServer
+	extends Omit<IPostData, 'imageUrl' | 'publishedAt'> {
+	image_url: string
+	published_at: string
+}
+
+export interface IPostDataSave {
+	id?: string | number
+	imageUrl?: string
+	title?: string
+	content?: string
 }

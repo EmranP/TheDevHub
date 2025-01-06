@@ -1,10 +1,34 @@
+import { Dispatch } from 'redux'
 import { setPostData } from '../../../../../entities/post/model/current-post/actions/set-post-data'
 import { TRequestServerHandler } from '../../../../../entities/users/types/api/fetch-users-method.interface'
+import { ActionRoot } from '../../../../../shared/types/store/action-root'
 
 export const addCommentAsync =
-	(requestServer: TRequestServerHandler, userId, postId, content) =>
-	dispatch => {
-		requestServer('addComment', userId, postId, content).then(postData => {
-			dispatch(setPostData(postData.res))
-		})
+	(
+		requestServer: TRequestServerHandler,
+		userId: string | number,
+		postId: string | number,
+		content: string
+	) =>
+	async (dispatch: Dispatch<ActionRoot>) => {
+		try {
+			const postData = await requestServer(
+				'addComment',
+				userId,
+				postId,
+				content
+			)
+
+			if (postData && postData.res) {
+				dispatch(setPostData(postData.res))
+			} else {
+				console.error('Failed to fetch post data:', postData?.error)
+			}
+		} catch (error) {
+			if (error instanceof Error) {
+				console.error(error.message)
+			} else {
+				console.log('Error load-post-async :(')
+			}
+		}
 	}

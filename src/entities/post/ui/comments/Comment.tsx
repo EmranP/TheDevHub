@@ -1,8 +1,9 @@
 import { Calendar, CircleUserRound, Trash } from 'lucide-react'
 import { FC } from 'react'
 import styled from 'styled-components'
+import { IComponentCommentProps } from '../../types/ui/post-ui.interface'
 
-const CommentContainer: FC = ({
+const CommentContainer: FC<IComponentCommentProps> = ({
 	className,
 	author,
 	content,

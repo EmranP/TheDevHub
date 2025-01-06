@@ -11,6 +11,7 @@ export type TRequestServerHandler = (
 	operation: ServerOperation,
 	...params: ServerRequestParams
 ) => RequestServerType
+
 export type TSetErrorMessageHandler = Dispatch<SetStateAction<string | null>>
 export type TSetUsersHandler = Dispatch<SetStateAction<UserTransform[] | null>>
 export type TSetRolesHandler = Dispatch<SetStateAction<Roles[] | null>>

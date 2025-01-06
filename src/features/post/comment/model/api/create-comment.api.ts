@@ -1,7 +1,11 @@
 import { API_SERVER_COMMENTS } from '../../../../../app/constant/api'
 import { generateDate } from '../../../../../utils'
 
-export const createComment = (userId, postId, content) =>
+export const createComment = (
+	userId: string | number,
+	postId: string | number,
+	content: string
+) =>
 	fetch(API_SERVER_COMMENTS, {
 		method: 'POST',
 		headers: {

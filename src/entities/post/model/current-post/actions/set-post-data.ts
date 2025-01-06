@@ -4,7 +4,7 @@ import { IPostData } from '../../../../../shared/types/db/posts.interface'
 import { ActionRoot } from '../../../../../shared/types/store/action-root'
 
 export const setPostData = (
-	postData: RequestResult<IPostData>
+	postData: RequestResult<IPostData | null>
 ): ActionRoot => ({
 	type: ActionType.SET_POST_DATA,
 	payload: postData,

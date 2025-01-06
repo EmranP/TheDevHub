@@ -1,8 +1,14 @@
 import { ROLE } from '../../../../../app/constant/role'
+import { IPostData } from '../../../../../shared/types/db/posts.interface'
 import { sessions } from '../../../../auth/model/sessions'
-import { updatePost } from '../api/updatePost'
+import { RequestResult } from '../../../../auth/types/operations/server'
+import { createPost } from '../../../create-post/index.export'
+import { updatePost } from '../api/update-post'
 
-export const savePost = async (hash: string | number, newPostData) => {
+export const savePost = async (
+	hash: string | number,
+	newPostData: IPostData
+): Promise<RequestResult<IPostData | null>> => {
 	const accessRoles = [ROLE.ADMIN]
 
 	const access = await sessions.access(hash, accessRoles)
@@ -14,10 +20,13 @@ export const savePost = async (hash: string | number, newPostData) => {
 		}
 	}
 
-	const updatedPost = await updatePost(newPostData)
+	const savedPost =
+		newPostData.id === ''
+			? await createPost(newPostData)
+			: await updatePost(newPostData)
 
 	return {
 		error: null,
-		res: updatedPost,
+		res: savedPost,
 	}
 }

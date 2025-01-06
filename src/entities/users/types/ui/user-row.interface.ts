@@ -1,9 +1,9 @@
 import { Roles } from '../../../../shared/types/db/roles.interface'
 
 export interface InitUserStateType {
-	id: number | null
+	id: number | string
 	login: string | null
-	roleId: number
+	roleId: number | string | null
 	session: string | null
 }
 

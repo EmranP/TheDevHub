@@ -3,12 +3,12 @@ import { transformPost } from '../../../../../shared/transformers'
 
 import {
 	IPostData,
-	IPostTransform,
+	IPostDataResponseServer,
 } from '../../../../../shared/types/db/posts.interface'
 
 export const getPost = async (
 	postId: string | number
-): Promise<IPostTransform | null> => {
+): Promise<IPostData | null> => {
 	try {
 		const response = await fetch(`${API_SERVER_POST}/${postId}`)
 
@@ -18,7 +18,7 @@ export const getPost = async (
 			)
 		}
 
-		const data: IPostData = await response.json()
+		const data: IPostDataResponseServer = await response.json()
 
 		return transformPost(data)
 	} catch (error) {
@@ -27,7 +27,6 @@ export const getPost = async (
 		} else {
 			console.error('Произошла неизвестная ошибка.')
 		}
-
 		return null
 	}
 }

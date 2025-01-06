@@ -11,7 +11,6 @@ import { Registration } from '../../pages/auth/register/Registration'
 import { HomePage } from '../../pages/home/HomePage'
 import { Post } from '../../pages/post/Post'
 import { PostForm } from '../../pages/post/PostForm'
-import { Posts } from '../../pages/post/Posts'
 import { Users } from '../../pages/user/Users'
 import { Blog } from '../Blog'
 import { store } from '../store'
@@ -50,7 +49,7 @@ const router = createBrowserRouter([
 			},
 			{
 				path: 'post',
-				element: <Posts />,
+				element: <Post />,
 				errorElement: <BubbleError />,
 			},
 			{
