@@ -1,6 +1,6 @@
-import { IPostData, IPostTransform } from '../types/db/posts.interface'
+import { IPostData, IPostDataResponseServer } from '../types/db/posts.interface'
 
-export const transformPost = (dbPost: IPostData): IPostTransform => ({
+export const transformPost = (dbPost: IPostDataResponseServer): IPostData => ({
 	imageUrl: dbPost.image_url,
 	publishedAt: dbPost.published_at,
 	id: dbPost.id,

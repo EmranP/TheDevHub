@@ -1,11 +1,9 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-
 import { forwardRef } from 'react'
 import styled from 'styled-components'
 import { InputProps } from '../../features/auth/types/ui/index.types'
 
 const InputForm = forwardRef<HTMLInputElement, InputProps>(
-	({ className, width, ...props }, ref) => {
+	({ className, ...props }, ref) => {
 		return <input className={className} {...props} ref={ref} />
 	}
 )

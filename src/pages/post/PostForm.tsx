@@ -1,7 +1,14 @@
 import { Save } from 'lucide-react'
-import { ChangeEvent, FC, useLayoutEffect, useRef, useState } from 'react'
+import {
+	ChangeEventHandler,
+	FC,
+	useLayoutEffect,
+	useRef,
+	useState,
+} from 'react'
 import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
+import { IComponentPostFormProps } from '../../entities/post/types/ui/post-ui.interface'
 import { savePostAsync } from '../../features/post/edit-post/index.export'
 import { SpecialPanel } from '../../features/post/ui/SpecialPanel'
 import { useAppDispatch } from '../../shared/hooks/store'
@@ -9,13 +16,13 @@ import { useServerRequest } from '../../shared/hooks/useServerRequest'
 import { Input } from '../../shared/ui'
 import { sanitizeContent } from '../../utils'
 
-const PostFormContainer: FC = ({
+const PostFormContainer: FC<IComponentPostFormProps> = ({
 	className,
 	post: { id, title, imageUrl, content, publishedAt },
 }) => {
 	const [imageUrlValue, setImageUrlValue] = useState<string>(imageUrl)
 	const [titleValue, setTitleValue] = useState<string>(title)
-	const contentRef = useRef(null)
+	const contentRef = useRef<HTMLDivElement>(null)
 
 	useLayoutEffect(() => {
 		setImageUrlValue(imageUrl)
@@ -27,6 +34,10 @@ const PostFormContainer: FC = ({
 	const requestServer = useServerRequest()
 
 	const saveHandler = () => {
+		if (!contentRef.current) {
+			return
+		}
+
 		const newContent = sanitizeContent(contentRef.current.innerHTML)
 
 		dispatch(
@@ -36,12 +47,18 @@ const PostFormContainer: FC = ({
 				title: titleValue,
 				content: newContent,
 			})
-		).then(({ id }) => navigate(`/post/${id}`))
+		).then(({ res }) => {
+			if (res?.id) {
+				navigate(`/post/${res.id}`)
+			} else {
+				console.error('Failed to save post:')
+			}
+		})
 	}
 
-	const imageChangeInputHandler = (e: ChangeEvent<HTMLInputElement>) =>
+	const imageChangeInputHandler: ChangeEventHandler<HTMLInputElement> = e =>
 		setImageUrlValue(e.target.value)
-	const titleChangeInputHandler = (e: ChangeEvent<HTMLInputElement>) =>
+	const titleChangeInputHandler: ChangeEventHandler<HTMLInputElement> = e =>
 		setTitleValue(e.target.value)
 
 	return (

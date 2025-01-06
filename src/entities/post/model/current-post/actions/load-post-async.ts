@@ -6,8 +6,20 @@ import { setPostData } from './set-post-data'
 
 export const loadPostAsync =
 	(requestServer: TRequestServerHandler, postId: Readonly<Params<string>>) =>
-	(dispatch: Dispatch<ActionRoot>) => {
-		requestServer('fetchPost', postId).then(postData => {
-			dispatch(setPostData(postData.res))
-		})
+	async (dispatch: Dispatch<ActionRoot>) => {
+		try {
+			const postData = await requestServer('fetchPost', postId)
+
+			if (postData && postData.res) {
+				dispatch(setPostData(postData.res))
+			} else {
+				console.error('Failed to fetch post data:', postData?.error)
+			}
+		} catch (error) {
+			if (error instanceof Error) {
+				console.error(error.message)
+			} else {
+				console.log('Error load-post-async :(')
+			}
+		}
 	}

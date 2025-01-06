@@ -1,11 +1,12 @@
 import { API_SERVER_POST } from '../../../../../app/constant/api'
+import { IPostData } from '../../../../../shared/types/db/posts.interface'
 
 export const updatePost = async ({
 	id,
 	imageUrl,
 	title,
 	content,
-}): Promise<Response> =>
+}: IPostData): Promise<IPostData> =>
 	fetch(`${API_SERVER_POST}/${id}`, {
 		method: 'PATCH',
 		headers: {

@@ -1,4 +1,4 @@
-import { InputHTMLAttributes } from 'react'
+import { ChangeEventHandler, InputHTMLAttributes } from 'react'
 import { UseFormRegisterReturn } from 'react-hook-form'
 
 export type InputProps = Omit<
@@ -8,4 +8,5 @@ export type InputProps = Omit<
 	Partial<UseFormRegisterReturn> & {
 		className?: string
 		width?: string | number
+		onChange?: ChangeEventHandler<HTMLInputElement>
 	}

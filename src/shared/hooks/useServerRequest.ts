@@ -15,13 +15,9 @@ export const useServerRequest = () => {
 			operation: ServerOperation,
 			...params: ServerRequestParams
 		): RequestServerType => {
-			const request: ServerRequestParams = [
-				'register',
-				'authorize',
-				'fetchPost',
-			].includes(operation)
-				? (params as ServerRequestParams)
-				: ([session, ...params] as ServerRequestParams)
+			const request = ['register', 'authorize', 'fetchPost'].includes(operation)
+				? params
+				: [session, ...params]
 
 			return server[operation](...request)
 		},

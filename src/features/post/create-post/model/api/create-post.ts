@@ -1,7 +1,12 @@
 import { API_SERVER_POST } from '../../../../../app/constant/api'
+import { IPostData } from '../../../../../shared/types/db/posts.interface'
 import { generateDate } from '../../../../../utils'
 
-export const createPost = ({ title, imageUrl, content }) =>
+export const createPost = ({
+	title,
+	imageUrl,
+	content,
+}: IPostData): Promise<IPostData> =>
 	fetch(API_SERVER_POST, {
 		method: 'POST',
 		headers: {

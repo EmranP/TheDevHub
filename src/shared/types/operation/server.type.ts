@@ -1,8 +1,9 @@
+import { IApiFetchPost } from '../../../entities/post/types/operations/fetch-post.type'
 import {
 	AuthorizeResultResponseType,
 	RequestResult,
 } from '../../../features/auth/types/operations/server'
-import { IPostTransform } from '../db/posts.interface'
+import { IPostData } from '../db/posts.interface'
 import { Roles } from '../db/roles.interface'
 import { UserTransform } from '../db/user.interface'
 
@@ -33,5 +34,24 @@ export interface ServerType {
 	) => Promise<RequestResult<boolean>>
 	fetchPost: (
 		postId: string | number
-	) => Promise<RequestResult<IPostTransform | null>>
+	) => Promise<RequestResult<IApiFetchPost | null>>
+	addComment: (
+		hash: number | string,
+		userId: number | string,
+		postId: number | string,
+		content: string
+	) => Promise<RequestResult<IPostData | null> | null>
+	removeComment: (
+		hash: string,
+		postId: string | number,
+		id: number | string
+	) => Promise<RequestResult<IPostData | null>>
+	savePost: (
+		hash: string | number,
+		newPostData: IPostData
+	) => Promise<RequestResult<IPostData | null>>
+	removePost: (
+		hash: string,
+		id: number | string
+	) => Promise<RequestResult<boolean>>
 }

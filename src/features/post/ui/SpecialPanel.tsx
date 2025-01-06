@@ -2,12 +2,13 @@ import { Calendar, Trash } from 'lucide-react'
 import { FC } from 'react'
 import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
+import { IComponentSpecialPanelProps } from '../../../entities/post/types/ui/post-ui.interface'
 import { useAppDispatch } from '../../../shared/hooks/store'
 import { useServerRequest } from '../../../shared/hooks/useServerRequest'
 import { CLOSE_MODAL, openModal } from '../comment/index.export'
 import { removePostAsync } from '../edit-post/index.export'
 
-const SpecialPanelContainer: FC = ({
+const SpecialPanelContainer: FC<IComponentSpecialPanelProps> = ({
 	className,
 	id,
 	publishedAt,
@@ -17,7 +18,7 @@ const SpecialPanelContainer: FC = ({
 	const navigate = useNavigate()
 	const requestServer = useServerRequest()
 
-	const postRemoveHandler = id => {
+	const postRemoveHandler = (id: number | string) => {
 		dispatch(
 			openModal({
 				text: 'Удалить статью?',

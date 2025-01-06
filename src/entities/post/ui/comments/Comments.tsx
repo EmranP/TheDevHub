@@ -9,10 +9,10 @@ import {
 } from '../../../../features/post/comment/index.export'
 import { useAppDispatch, useAppSelector } from '../../../../shared/hooks/store'
 import { useServerRequest } from '../../../../shared/hooks/useServerRequest'
-import { ComponentPropsType } from '../../../../shared/types/ui'
+import { IComponentCommentsProps } from '../../types/ui/post-ui.interface'
 import { Comment } from './Comment'
 
-const CommentsContainer: FC<ComponentPropsType> = ({
+const CommentsContainer: FC<IComponentCommentsProps> = ({
 	className,
 	comments,
 	postId,
@@ -25,12 +25,19 @@ const CommentsContainer: FC<ComponentPropsType> = ({
 	const changeCommentHandler = (e: ChangeEvent<HTMLTextAreaElement>) =>
 		setNewComment(e.target.value)
 
-	const newCommentAddHandler = (userId, postId, content) => {
+	const newCommentAddHandler = (
+		userId: string | number,
+		postId: string | number,
+		content: string
+	) => {
 		dispatch(addCommentAsync(requestServer, userId, postId, content))
 		setNewComment('')
 	}
 
-	const removeCommentHandler = (postId, id) => {
+	const removeCommentHandler = (
+		postId: string | number,
+		id: number | string
+	) => {
 		dispatch(
 			openModal({
 				text: 'Удалить комментарий?',

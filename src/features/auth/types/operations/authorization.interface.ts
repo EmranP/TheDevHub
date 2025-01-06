@@ -1,6 +1,5 @@
 import { ReactNode } from 'react'
 import { SubmitErrorHandler, SubmitHandler } from 'react-hook-form'
-import { ActionRoot } from '../../../../shared/types/store/action-root'
 
 export interface AuthorizationProps {
 	title: string
@@ -23,5 +22,5 @@ export interface AuthorizationProps {
 	}: {
 		login: string
 		password: string
-	}) => Promise<ActionRoot | undefined>
+	}) => Promise<void>
 }

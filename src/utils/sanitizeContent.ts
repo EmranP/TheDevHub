@@ -1,4 +1,4 @@
-export const sanitizeContent = content =>
+export const sanitizeContent = (content: string): string =>
 	content
 		.replaceAll('&nbsp', ' ')
 		.replace(/ +/, ' ')
