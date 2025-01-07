@@ -34,3 +34,7 @@ export interface IPostDataSave {
 	title?: string
 	content?: string
 }
+
+export interface IPostsDataHomePage extends IPostData {
+	commentsCount: number | string
+}

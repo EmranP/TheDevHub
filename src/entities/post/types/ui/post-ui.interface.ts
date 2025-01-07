@@ -16,7 +16,7 @@ export interface IComponentCommentProps extends ComponentPropsType {
 }
 
 export interface IComponentPostFormProps extends ComponentPropsType {
-	post: IPostData
+	post?: IPostData
 }
 
 export interface IComponentSpecialPanelProps extends ComponentPropsType {

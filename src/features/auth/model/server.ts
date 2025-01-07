@@ -1,4 +1,5 @@
 import { fetchPost } from '../../../entities/post/model/current-post/operations/fetch-post'
+import { fetchPosts } from '../../../entities/posts/index.export'
 import {
 	fetchUsers,
 	removeUser,
@@ -22,4 +23,5 @@ export const server: ServerType = {
 	removeComment,
 	savePost,
 	removePost,
+	fetchPosts,
 }

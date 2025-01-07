@@ -1,5 +1,6 @@
 export * from './authFormSchema'
 export * from './formatDate'
 export * from './generateDate'
+export * from './getCommentsCount'
 export * from './regFormSchema'
 export * from './sanitizeContent'

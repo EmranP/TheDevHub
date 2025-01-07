@@ -3,7 +3,7 @@ import {
 	AuthorizeResultResponseType,
 	RequestResult,
 } from '../../../features/auth/types/operations/server'
-import { IPostData } from '../db/posts.interface'
+import { IPostData, IPostsDataHomePage } from '../db/posts.interface'
 import { Roles } from '../db/roles.interface'
 import { UserTransform } from '../db/user.interface'
 
@@ -54,4 +54,7 @@ export interface ServerType {
 		hash: string,
 		id: number | string
 	) => Promise<RequestResult<boolean>>
+	fetchPosts: (
+		postId: string | number
+	) => Promise<RequestResult<IPostsDataHomePage[] | null | undefined>>
 }
