@@ -28,6 +28,11 @@ export interface IPostDataResponseServer
 	published_at: string
 }
 
+export interface IApiGetPostData {
+	posts: IPostData[]
+	links: string | null
+}
+
 export interface IPostDataSave {
 	id?: string | number
 	imageUrl?: string
@@ -35,6 +40,11 @@ export interface IPostDataSave {
 	content?: string
 }
 
-export interface IPostsDataHomePage extends IPostData {
+export interface IPostsDataWithCommentCount extends IPostData {
 	commentsCount: number | string
+}
+
+export interface IApiGetPostsData {
+	posts: IPostsDataWithCommentCount[]
+	links: string | number | null
 }

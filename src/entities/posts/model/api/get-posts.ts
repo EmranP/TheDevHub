@@ -1,25 +1,42 @@
 import { API_SERVER_POST } from '../../../../app/constant/api'
 import { transformPost } from '../../../../shared/transformers'
 import {
-	IPostData,
+	IApiGetPostData,
 	IPostDataResponseServer,
 } from '../../../../shared/types/db/posts.interface'
 
-export const getPosts = async (): Promise<IPostData[] | undefined> => {
+export const getPosts = async (
+	page: string | number,
+	limit: string | number
+): Promise<IApiGetPostData | null> => {
 	try {
-		const response: Response = await fetch(API_SERVER_POST)
+		const response: Response = await fetch(
+			`${API_SERVER_POST}?_page=${page}&_limit=${limit}`
+		)
 		if (!response.ok) {
 			throw new Error(`HTTP error! status: ${response.status}`)
 		}
 
-		const data: IPostDataResponseServer[] = await response.json()
+		const data: [IPostDataResponseServer[], string | null] = await Promise.all([
+			response.json(),
+			response.headers.get('Link'),
+		])
+		const [loadedPosts, links] = data
 
-		if (!Array.isArray(data) || data.length === 0) {
+		if (!Array.isArray(loadedPosts) || loadedPosts.length === 0) {
 			throw new Error('Пользователь не найден или данные некорректны.')
 		}
 
-		return data.map(transformPost)
+		return {
+			posts: loadedPosts.map(transformPost),
+			links: links || '',
+		}
 	} catch (error) {
-		console.error(error as Error)
+		if (error instanceof Error) {
+			console.error(error.message)
+		} else {
+			console.log('Error Fetch-posts (')
+		}
+		return null
 	}
 }

@@ -37,7 +37,7 @@ const ContainerPostCard: FC<IPostCardProps> = ({
 export const PostCard = styled(ContainerPostCard)`
 	display: flex;
 	flex-direction: column;
-	width: 280px;
+	width: 340px;
 	margin: 20px;
 	border: 1px solid #000;
 
