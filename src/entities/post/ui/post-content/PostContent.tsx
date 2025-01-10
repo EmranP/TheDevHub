@@ -3,13 +3,15 @@ import { FC } from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import { SpecialPanel } from '../../../../features/post/ui/SpecialPanel'
+import { IPostData } from '../../../../shared/types/db/posts.interface'
 import { Title } from '../../../../shared/ui'
 import { IComponentPostFormProps } from '../../types/ui/post-ui.interface'
 
 const PostContentContainer: FC<IComponentPostFormProps> = ({
 	className,
-	post: { id, title, imageUrl, content, publishedAt },
+	post,
 }) => {
+	const { id, title, imageUrl, content, publishedAt } = post as IPostData
 	return (
 		<div className={className}>
 			<img src={imageUrl} alt={title} />

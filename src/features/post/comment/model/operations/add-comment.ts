@@ -1,9 +1,10 @@
 import { ROLE } from '../../../../../app/constant/role'
 import { getPost } from '../../../../../entities/post/model/current-post/api/get-post'
 import { IPostData } from '../../../../../shared/types/db/posts.interface'
+import { getPostCommentsWithAuthor } from '../../../../../utils'
 import { sessions } from '../../../../auth/model/sessions'
 import { RequestResult } from '../../../../auth/types/operations/server'
-import { createComment, getComments } from '../../index.export'
+import { createComment } from '../../index.export'
 
 export const addComment = async (
 	hash: number | string,
@@ -38,11 +39,11 @@ export const addComment = async (
 			throw new Error('Некорректные данные поста')
 		}
 
-		const comments = await getComments(postId)
+		const commentWithAuthor = await getPostCommentsWithAuthor(postId)
 
 		return {
 			error: null,
-			res: { ...post, comments },
+			res: { ...post, comments: commentWithAuthor },
 		}
 	} catch (error) {
 		if (error instanceof Error) {

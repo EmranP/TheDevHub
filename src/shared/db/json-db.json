@@ -20,6 +20,13 @@
       "registered_at": "1984-07-24 12:05",
       "role_id": 2,
       "id": "ZpnTUHu"
+    },
+    {
+      "login": "Dunya",
+      "password": "123456",
+      "registered_at": "1992-09-04 01:03",
+      "role_id": 2,
+      "id": "TO-3LMs"
     }
   ],
   "roles": [
@@ -144,13 +151,6 @@
     {
       "author_id": "001",
       "post_id": "1",
-      "published_at": "1976-07-03 22:36",
-      "content": "Hello Post 3",
-      "id": 3
-    },
-    {
-      "author_id": "001",
-      "post_id": "1",
       "published_at": "1974-11-04 00:09",
       "content": "Hello Post 4",
       "id": 4
@@ -177,11 +177,18 @@
       "id": 7
     },
     {
-      "author_id": "tYJZZ4F",
-      "post_id": "1",
-      "published_at": "1975-04-04 23:35",
-      "content": "njknkj",
-      "id": 8
+      "author_id": "001",
+      "post_id": "2",
+      "published_at": "2000-09-04 10:43",
+      "content": "hahahahahhaha",
+      "id": 10
+    },
+    {
+      "author_id": "001",
+      "post_id": "2",
+      "published_at": "1992-12-04 20:59",
+      "content": "njknk",
+      "id": 11
     }
   ],
   "sessions": [
@@ -283,6 +290,17 @@
         "roleId": 0
       },
       "id": 9
+    },
+    {
+      "hash": "0.93588569220554318484062150673707947134971618652344",
+      "user": {
+        "id": "001",
+        "login": "admin",
+        "password": "dess2211",
+        "registeredAt": "12.12.2025",
+        "roleId": 0
+      },
+      "id": 10
     }
   ]
 }

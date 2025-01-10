@@ -1,6 +1,7 @@
 import { Send } from 'lucide-react'
 import { ChangeEvent, FC, useState } from 'react'
 import styled from 'styled-components'
+import { ROLE } from '../../../../app/constant/role'
 import {
 	addCommentAsync,
 	CLOSE_MODAL,
@@ -18,7 +19,7 @@ const CommentsContainer: FC<IComponentCommentsProps> = ({
 	postId,
 }) => {
 	const [newComment, setNewComment] = useState('')
-	const userId = useAppSelector(state => state.user.id)
+	const { id, roleId } = useAppSelector(state => state.user)
 	const dispatch = useAppDispatch()
 	const requestServer = useServerRequest()
 
@@ -50,21 +51,28 @@ const CommentsContainer: FC<IComponentCommentsProps> = ({
 		)
 	}
 
+	const isGuest = roleId === ROLE.GUEST
+	const isAdminOrModerator = [ROLE.ADMIN, ROLE.MODERATOR].includes(
+		roleId as number
+	)
+
 	return (
 		<div className={className}>
-			<div className='new-comment'>
-				<textarea
-					value={newComment}
-					name='comment'
-					placeholder='Комментарий...'
-					onChange={changeCommentHandler}
-				/>
-				<Send
-					onClick={() => newCommentAddHandler(userId, postId, newComment)}
-					cursor={'pointer'}
-					className='icon-send'
-				/>
-			</div>
+			{!isGuest && (
+				<div className='new-comment'>
+					<textarea
+						value={newComment}
+						name='comment'
+						placeholder='Комментарий...'
+						onChange={changeCommentHandler}
+					/>
+					<Send
+						onClick={() => newCommentAddHandler(id, postId, newComment)}
+						cursor={'pointer'}
+						className='icon-send'
+					/>
+				</div>
+			)}
 			<div className='comments'>
 				{comments.map(({ id, author, content, publishedAt }) => (
 					<Comment
@@ -72,6 +80,7 @@ const CommentsContainer: FC<IComponentCommentsProps> = ({
 						author={author}
 						content={content}
 						publishedAt={publishedAt}
+						isAdminOrModerator={isAdminOrModerator}
 						onRemoveComment={() => removeCommentHandler(postId, id)}
 					/>
 				))}

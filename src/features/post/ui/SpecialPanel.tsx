@@ -2,9 +2,11 @@ import { Calendar, Trash } from 'lucide-react'
 import { FC } from 'react'
 import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
+import { ROLE } from '../../../app/constant/role'
 import { IComponentSpecialPanelProps } from '../../../entities/post/types/ui/post-ui.interface'
-import { useAppDispatch } from '../../../shared/hooks/store'
+import { useAppDispatch, useAppSelector } from '../../../shared/hooks/store'
 import { useServerRequest } from '../../../shared/hooks/useServerRequest'
+import { checkAccess } from '../../../utils'
 import { CLOSE_MODAL, openModal } from '../comment/index.export'
 import { removePostAsync } from '../edit-post/index.export'
 
@@ -14,6 +16,7 @@ const SpecialPanelContainer: FC<IComponentSpecialPanelProps> = ({
 	publishedAt,
 	children,
 }) => {
+	const userRole = useAppSelector(state => state.user.roleId)
 	const dispatch = useAppDispatch()
 	const navigate = useNavigate()
 	const requestServer = useServerRequest()
@@ -31,22 +34,26 @@ const SpecialPanelContainer: FC<IComponentSpecialPanelProps> = ({
 		)
 	}
 
+	const isAdmin = checkAccess([ROLE.ADMIN], userRole)
+
 	return (
 		<div className={className}>
 			<div className='published-at'>
 				{publishedAt && <Calendar size={22} />}
 				{publishedAt}
 			</div>
-			<div className='buttons'>
-				{children}
-				{publishedAt && (
-					<Trash
-						size={22}
-						cursor={'pointer'}
-						onClick={() => postRemoveHandler(id)}
-					/>
-				)}
-			</div>
+			{isAdmin && (
+				<div className='buttons'>
+					{children}
+					{publishedAt && (
+						<Trash
+							size={22}
+							cursor={'pointer'}
+							onClick={() => postRemoveHandler(id)}
+						/>
+					)}
+				</div>
+			)}
 		</div>
 	)
 }

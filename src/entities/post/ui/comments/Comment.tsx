@@ -8,6 +8,7 @@ const CommentContainer: FC<IComponentCommentProps> = ({
 	author,
 	content,
 	publishedAt,
+	isAdminOrModerator,
 	onRemoveComment,
 }) => {
 	return (
@@ -26,12 +27,14 @@ const CommentContainer: FC<IComponentCommentProps> = ({
 				<div className='comment-text'>{content}</div>
 			</div>
 
-			<Trash
-				onClick={onRemoveComment}
-				size={22}
-				cursor={'pointer'}
-				className='icon-trash'
-			/>
+			{isAdminOrModerator && (
+				<Trash
+					onClick={onRemoveComment}
+					size={22}
+					cursor={'pointer'}
+					className='icon-trash'
+				/>
+			)}
 		</div>
 	)
 }

@@ -12,6 +12,7 @@ export interface IComponentCommentProps extends ComponentPropsType {
 	author: string | undefined
 	content: string
 	publishedAt: string
+	isAdminOrModerator: boolean
 	onRemoveComment: () => void
 }
 

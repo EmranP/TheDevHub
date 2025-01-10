@@ -6,6 +6,7 @@ import { ROLE } from '../../../app/constant/role'
 import { logout } from '../../../entities/users/model/action/user-action'
 import { useAppDispatch, useAppSelector } from '../../../shared/hooks/store'
 import { Button } from '../../../shared/ui/Button'
+import { checkAccess } from '../../../utils'
 
 const HeaderActionStyle = styled.div`
 	display: flex;
@@ -57,6 +58,8 @@ export const HeaderAction: FC = () => {
 		return
 	}
 
+	const isAdmin = checkAccess([ROLE.ADMIN], roleId)
+
 	return (
 		<HeaderActionStyle>
 			{roleId === ROLE.GUEST ? (
@@ -74,7 +77,6 @@ export const HeaderAction: FC = () => {
 					/>
 				</HeaderActionAuthStyle>
 			)}
-
 			<HeaderActionAuthSettingStyle>
 				<StepBack
 					onClick={movePrevPageHandler}
@@ -82,12 +84,26 @@ export const HeaderAction: FC = () => {
 					height={35}
 					cursor={'pointer'}
 				/>
-				<Link to='post'>
-					<FileText color='#1c1c1c' width={30} height={35} cursor={'pointer'} />
-				</Link>
-				<Link to='users'>
-					<Users color='#1c1c1c' width={30} height={35} cursor={'pointer'} />
-				</Link>
+				{isAdmin && (
+					<>
+						<Link to='post'>
+							<FileText
+								color='#1c1c1c'
+								width={30}
+								height={35}
+								cursor={'pointer'}
+							/>
+						</Link>
+						<Link to='users'>
+							<Users
+								color='#1c1c1c'
+								width={30}
+								height={35}
+								cursor={'pointer'}
+							/>
+						</Link>
+					</>
+				)}
 			</HeaderActionAuthSettingStyle>
 		</HeaderActionStyle>
 	)
