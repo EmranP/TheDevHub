@@ -11,4 +11,11 @@ export default defineConfig({
 			// Использую абсолютный путь или путь относительно корня проекта
 		},
 	},
+	build: {
+		rollupOptions: {
+			input: {
+				main: './src/main.tsx',
+			},
+		},
+	},
 })
