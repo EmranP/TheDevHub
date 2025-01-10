@@ -28,9 +28,23 @@ export interface IPostDataResponseServer
 	published_at: string
 }
 
+export interface IApiGetPostData {
+	posts: IPostData[]
+	links: string | null
+}
+
 export interface IPostDataSave {
 	id?: string | number
 	imageUrl?: string
 	title?: string
 	content?: string
+}
+
+export interface IPostsDataWithCommentCount extends IPostData {
+	commentsCount: number | string
+}
+
+export interface IApiGetPostsData {
+	posts: IPostsDataWithCommentCount[]
+	links: string | number | null
 }

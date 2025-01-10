@@ -12,11 +12,12 @@ export interface IComponentCommentProps extends ComponentPropsType {
 	author: string | undefined
 	content: string
 	publishedAt: string
+	isAdminOrModerator: boolean
 	onRemoveComment: () => void
 }
 
 export interface IComponentPostFormProps extends ComponentPropsType {
-	post: IPostData
+	post?: IPostData
 }
 
 export interface IComponentSpecialPanelProps extends ComponentPropsType {

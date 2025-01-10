@@ -30,4 +30,9 @@ export const Button = styled(ButtonStyled)`
 	font-size: 20px;
 	letter-spacing: -0.03em;
 	color: #1c1c1c;
+
+	&:disabled {
+		opacity: 0.6;
+		cursor: default;
+	}
 `

@@ -3,12 +3,14 @@ import { ROLE } from '../../app/constant/role'
 import { fetchUsersMethod } from '../../entities/users/model/api/fetch-users-method'
 import { TableRow } from '../../entities/users/ui/table-row'
 import { UserRow } from '../../entities/users/ui/user-row'
+import { useAppSelector } from '../../shared/hooks/store'
 import { useServerRequest } from '../../shared/hooks/useServerRequest'
 import { Roles } from '../../shared/types/db/roles.interface'
 import { UserTransform } from '../../shared/types/db/user.interface'
 import { Container } from '../../shared/ui/Container'
 import { Title } from '../../shared/ui/Title'
-import { Content } from '../../widgets/content/components/Content'
+import { checkAccess } from '../../utils'
+import { PrivateContent } from '../../widgets/content/components/PrivateContent'
 
 export const Users: FC = () => {
 	const [users, setUsers] = useState<UserTransform[] | null>([])
@@ -16,22 +18,31 @@ export const Users: FC = () => {
 	const [errorMessage, setErrorMessage] = useState<string | null>(null)
 	const [shouldUpdateUserList, setShouldUpdateUserList] =
 		useState<boolean>(false)
+	const userRole = useAppSelector(state => state.user.roleId)
 
 	const requestServer = useServerRequest()
 
 	useEffect(() => {
-		fetchUsersMethod(requestServer, setErrorMessage, setUsers, setRoles)
-	}, [requestServer, shouldUpdateUserList])
+		if (!checkAccess([ROLE.ADMIN], userRole)) {
+			return
+		}
 
-	const userRemoveHandler = (userId: number) => {
+		fetchUsersMethod(requestServer, setErrorMessage, setUsers, setRoles)
+	}, [requestServer, shouldUpdateUserList, userRole])
+
+	const userRemoveHandler = (userId: number | string) => {
+		if (!checkAccess([ROLE.ADMIN], userRole)) {
+			return
+		}
+
 		requestServer('removeUser', userId).then(() => {
 			setShouldUpdateUserList(!shouldUpdateUserList)
 		})
 	}
 
 	return (
-		<Container>
-			<Content error={errorMessage}>
+		<PrivateContent serverError={errorMessage} access={[ROLE.ADMIN]}>
+			<Container>
 				<Title textAlign={'center'} title='Пользователи' />
 				<div className='table'>
 					<TableRow>
@@ -51,7 +62,7 @@ export const Users: FC = () => {
 						/>
 					))}
 				</div>
-			</Content>
-		</Container>
+			</Container>
+		</PrivateContent>
 	)
 }

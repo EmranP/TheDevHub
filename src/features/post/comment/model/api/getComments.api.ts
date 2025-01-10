@@ -5,13 +5,17 @@ import {
 	InitCommentPostInterface,
 } from '../../../../../shared/types/db/posts.interface'
 
+const POST_COMMENTS_URL = `${API_SERVER_COMMENTS}?post_id=`
+
 export const getComments = async (
 	postId: number | string
 ): Promise<ICommentPostData[]> => {
+	const url =
+		postId === undefined ? API_SERVER_COMMENTS : POST_COMMENTS_URL + postId
+
 	try {
-		const response: Response = await fetch(
-			`${API_SERVER_COMMENTS}?post_id=${postId}`
-		)
+		const response: Response = await fetch(url)
+
 		if (!response.ok) {
 			throw new Error(`HTTP error! status: ${response.status}`)
 		}

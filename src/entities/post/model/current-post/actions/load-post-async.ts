@@ -10,11 +10,11 @@ export const loadPostAsync =
 		try {
 			const postData = await requestServer('fetchPost', postId)
 
-			if (postData && postData.res) {
+			if (postData && postData?.res) {
 				dispatch(setPostData(postData.res))
-			} else {
-				console.error('Failed to fetch post data:', postData?.error)
 			}
+
+			return postData
 		} catch (error) {
 			if (error instanceof Error) {
 				console.error(error.message)
