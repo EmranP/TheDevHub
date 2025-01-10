@@ -9,7 +9,7 @@ export interface InitUserStateType {
 
 export interface UserRowProps {
 	className?: string
-	id: number
+	id: number | string
 	login: string
 	registeredAt: string
 	roleId: number

@@ -10,7 +10,7 @@ export const getApiDataWeather = async (
 			throw new Error('Error api weather :(')
 		}
 		const data: ApiGetWeatherType = await response.json()
-		console.log(data)
+
 		return data
 	} catch (error) {
 		if (error instanceof Error) {

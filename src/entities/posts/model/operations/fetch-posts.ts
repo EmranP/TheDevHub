@@ -10,6 +10,7 @@ import { getCommentsCount } from '../../../../utils'
 import { getPosts } from '../api/get-posts'
 
 export const fetchPosts = async (
+	searchPhrase: string,
 	postId: string | number,
 	page: string | number,
 	limit: string | number
@@ -17,7 +18,10 @@ export const fetchPosts = async (
 	const [postsResult, comments]: [
 		IApiGetPostData | null,
 		ICommentPostData[] | null
-	] = await Promise.all([getPosts(page, limit), getComments(postId)])
+	] = await Promise.all([
+		getPosts(searchPhrase, page, limit),
+		getComments(postId),
+	])
 
 	if (!postsResult || !postsResult.posts) {
 		return {

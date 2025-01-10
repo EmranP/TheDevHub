@@ -12,6 +12,7 @@ export const getComments = async (
 ): Promise<ICommentPostData[]> => {
 	const url =
 		postId === undefined ? API_SERVER_COMMENTS : POST_COMMENTS_URL + postId
+
 	try {
 		const response: Response = await fetch(url)
 

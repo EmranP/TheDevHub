@@ -8,6 +8,11 @@ export interface WrapperPropsType extends ComponentPropsType {
 	children: ReactNode
 }
 
-export interface ComponentContentPropsType extends WrapperPropsType {
+export interface ErrorUIProps extends ComponentPropsType {
 	error: string | null
+}
+
+export interface ComponentPrivateContentProps extends WrapperPropsType {
+	serverError?: string | null
+	access?: [string | number | null]
 }

@@ -168,6 +168,20 @@
       "published_at": "1974-09-11 17:01",
       "content": "hashahhsa",
       "id": 6
+    },
+    {
+      "author_id": "001",
+      "post_id": "2",
+      "published_at": "1980-04-28 04:50",
+      "content": "asndkjasnd",
+      "id": 7
+    },
+    {
+      "author_id": "tYJZZ4F",
+      "post_id": "1",
+      "published_at": "1975-04-04 23:35",
+      "content": "njknkj",
+      "id": 8
     }
   ],
   "sessions": [
@@ -258,6 +272,17 @@
         "roleId": 0
       },
       "id": 8
+    },
+    {
+      "hash": "0.29917102521512606294606939627556130290031433105469",
+      "user": {
+        "id": "001",
+        "login": "admin",
+        "password": "dess2211",
+        "registeredAt": "12.12.2025",
+        "roleId": 0
+      },
+      "id": 9
     }
   ]
 }

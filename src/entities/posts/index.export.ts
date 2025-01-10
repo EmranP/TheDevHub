@@ -9,6 +9,7 @@ export * from './model/operations/fetch-posts'
 // UI
 export * from './ui/PostCard'
 export * from './ui/Pagination'
+export * from './ui/Search'
 
 //! Types ================
 

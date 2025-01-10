@@ -5,7 +5,7 @@ import {
 	RouterProvider,
 	useRouteError,
 } from 'react-router-dom'
-import { NotFoundPage } from '../../pages/404/NotFoundPage'
+import { ErrorUI } from '../../pages/404/ErrorPage'
 import { Login } from '../../pages/auth/login/Login'
 import { Registration } from '../../pages/auth/register/Registration'
 import { HomePage } from '../../pages/home/HomePage'
@@ -13,6 +13,7 @@ import { Post } from '../../pages/post/Post'
 import { PostForm } from '../../pages/post/PostForm'
 import { Users } from '../../pages/user/Users'
 import { Blog } from '../Blog'
+import { ERROR } from '../constant/error'
 import { store } from '../store'
 
 const BubbleError: FC = () => {
@@ -67,18 +68,9 @@ const router = createBrowserRouter([
 			// Page 404
 			{
 				path: '*',
-				element: <NotFoundPage />,
+				element: <ErrorUI error={ERROR.PAGE_NOT_EXIST} />,
 			},
 		],
-	},
-	// Page 404
-	{
-		path: '*',
-		element: <NotFoundPage />,
-	},
-	{
-		path: '',
-		element: <NotFoundPage />,
 	},
 ])
 

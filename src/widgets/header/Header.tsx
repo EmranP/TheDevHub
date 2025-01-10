@@ -25,4 +25,5 @@ export const Header = styled(HeaderContainer)<ComponentPropsType>`
 	height: 175px;
 	border-bottom: 3px solid #adadad;
 	box-shadow: 0px 7px 35px 1px #616161;
+	z-index: 50;
 `

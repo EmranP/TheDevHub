@@ -6,12 +6,13 @@ import {
 } from '../../../../shared/types/db/posts.interface'
 
 export const getPosts = async (
+	searchPhrase: string,
 	page: string | number,
 	limit: string | number
 ): Promise<IApiGetPostData | null> => {
 	try {
 		const response: Response = await fetch(
-			`${API_SERVER_POST}?_page=${page}&_limit=${limit}`
+			`${API_SERVER_POST}?title_like=${searchPhrase}&_page=${page}&_limit=${limit}`
 		)
 		if (!response.ok) {
 			throw new Error(`HTTP error! status: ${response.status}`)
