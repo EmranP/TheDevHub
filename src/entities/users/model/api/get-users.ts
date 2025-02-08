@@ -1,10 +1,10 @@
-import { API_SERVER_USER } from '../../../../app/constant/api'
+// import { API_SERVER_USER } from '../../../../app/constant/api'
 import { transformUser } from '../../../../shared/transformers'
 import { User, UserTransform } from '../../../../shared/types/db/user.interface'
 
 export const getUsers = async (): Promise<UserTransform[] | undefined> => {
 	try {
-		const response: Response = await fetch(API_SERVER_USER)
+		const response: Response = await fetch('')
 		if (!response.ok) {
 			throw new Error(`HTTP error! status: ${response.status}`)
 		}

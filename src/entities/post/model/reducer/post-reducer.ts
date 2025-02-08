@@ -16,11 +16,18 @@ export const postReducer = (
 	action: ActionRoot
 ): IPostData => {
 	switch (action.type) {
-		case ActionType.SET_POST_DATA:
-			return { ...state, ...action.payload }
-		case ActionType.RESET_POST_DATA:
-			return initialPostState
-		default:
-			return state
+	case ActionType.ADD_COMMENT:
+		return {...state, comments: [
+			...state.comments,
+			action.payload
+		]}
+	case ActionType.REMOVE_COMMENT:
+		return {...state, comments: state.comments.filter(comment => comment.id !== action.payload)}
+	case ActionType.SET_POST_DATA:
+		return { ...state, ...action.payload }
+	case ActionType.RESET_POST_DATA:
+		return initialPostState
+	default:
+		return state
 	}
 }

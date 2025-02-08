@@ -9,7 +9,6 @@ import {
 	removeCommentAsync,
 } from '../../../../features/post/comment/index.export'
 import { useAppDispatch, useAppSelector } from '../../../../shared/hooks/store'
-import { useServerRequest } from '../../../../shared/hooks/useServerRequest'
 import { IComponentCommentsProps } from '../../types/ui/post-ui.interface'
 import { Comment } from './Comment'
 
@@ -19,19 +18,17 @@ const CommentsContainer: FC<IComponentCommentsProps> = ({
 	postId,
 }) => {
 	const [newComment, setNewComment] = useState('')
-	const { id, roleId } = useAppSelector(state => state.user)
+	const { roleId } = useAppSelector(state => state.user)
 	const dispatch = useAppDispatch()
-	const requestServer = useServerRequest()
 
 	const changeCommentHandler = (e: ChangeEvent<HTMLTextAreaElement>) =>
 		setNewComment(e.target.value)
 
 	const newCommentAddHandler = (
-		userId: string | number,
 		postId: string | number,
 		content: string
 	) => {
-		dispatch(addCommentAsync(requestServer, userId, postId, content))
+		dispatch(addCommentAsync(postId, content))
 		setNewComment('')
 	}
 
@@ -43,7 +40,7 @@ const CommentsContainer: FC<IComponentCommentsProps> = ({
 			openModal({
 				text: 'Удалить комментарий?',
 				onConfirm: () => {
-					dispatch(removeCommentAsync(requestServer, postId, id))
+					dispatch(removeCommentAsync(postId, id))
 					dispatch(CLOSE_MODAL)
 				},
 				onCancel: () => dispatch(CLOSE_MODAL),
@@ -67,7 +64,7 @@ const CommentsContainer: FC<IComponentCommentsProps> = ({
 						onChange={changeCommentHandler}
 					/>
 					<Send
-						onClick={() => newCommentAddHandler(id, postId, newComment)}
+						onClick={() => newCommentAddHandler(postId, newComment)}
 						cursor={'pointer'}
 						className='icon-send'
 					/>
