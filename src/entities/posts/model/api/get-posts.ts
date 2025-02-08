@@ -1,4 +1,4 @@
-import { API_SERVER_POST } from '../../../../app/constant/api'
+// import { API_SERVER_POST } from '../../../../app/constant/api'
 import { transformPost } from '../../../../shared/transformers'
 import {
 	IApiGetPostData,
@@ -12,7 +12,7 @@ export const getPosts = async (
 ): Promise<IApiGetPostData | null> => {
 	try {
 		const response: Response = await fetch(
-			`${API_SERVER_POST}?title_like=${searchPhrase}&_page=${page}&_limit=${limit}`
+			`/?title_like=${searchPhrase}&_page=${page}&_limit=${limit}`
 		)
 		if (!response.ok) {
 			throw new Error(`HTTP error! status: ${response.status}`)

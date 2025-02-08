@@ -7,7 +7,6 @@ import { ICommentWithAuthor } from '../../entities/post/types/operations/fetch-p
 import { Comments, PostContent } from '../../entities/post/ui'
 import { RESET_POST_DATA } from '../../features/post/edit-post/index.export'
 import { useAppDispatch, useAppSelector } from '../../shared/hooks/store'
-import { useServerRequest } from '../../shared/hooks/useServerRequest'
 import { ComponentPropsType } from '../../shared/types/ui'
 import { PrivateContent } from '../../widgets/content/components/PrivateContent'
 import { ErrorUI } from '../404/ErrorPage'
@@ -20,7 +19,6 @@ const PostContainer: FC<ComponentPropsType> = ({ className }) => {
 	const [isLoading, setIsLoading] = useState<boolean>(true)
 	const isCreating = !!useMatch('/post')
 	const isEditing = !!useMatch('/post/:id/edit')
-	const requestServer = useServerRequest()
 	const post = useAppSelector(state => state.post)
 
 	useLayoutEffect(() => {
@@ -33,11 +31,11 @@ const PostContainer: FC<ComponentPropsType> = ({ className }) => {
 			return
 		}
 
-		dispatch(loadPostAsync(requestServer, params.id)).then(postData => {
+		dispatch(loadPostAsync(params.id)).then(postData => {
 			setError(postData?.error)
 			setIsLoading(false)
 		})
-	}, [dispatch, params.id, requestServer, isCreating])
+	}, [dispatch, params.id, isCreating])
 
 	if (isLoading) {
 		return null

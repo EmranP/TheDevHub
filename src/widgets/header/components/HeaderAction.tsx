@@ -40,7 +40,7 @@ const HeaderActionAuthSettingStyle = styled.div`
 `
 
 export const HeaderAction: FC = () => {
-	const { roleId, id, login, session } = useAppSelector(state => state.user)
+	const { roleId, id, login } = useAppSelector(state => state.user)
 	const dispatch = useAppDispatch()
 	const navigate = useNavigate()
 
@@ -51,7 +51,7 @@ export const HeaderAction: FC = () => {
 
 		if (isUserReady) {
 			sessionStorage.removeItem('userData')
-			dispatch(logout(session))
+			dispatch(logout())
 			navigate('/')
 		}
 

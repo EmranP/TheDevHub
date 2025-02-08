@@ -3,40 +3,26 @@ import { ChangeEvent, FC, useEffect, useMemo, useState } from 'react'
 import styled from 'styled-components'
 import { PAGINATION_LIMIT } from '../../app/constant/pagination-limit'
 import { Pagination, PostCard, Search } from '../../entities/posts/index.export'
-import { useAppSelector } from '../../shared/hooks/store'
-import { useServerRequest } from '../../shared/hooks/useServerRequest'
 import { IPostsDataWithCommentCount } from '../../shared/types/db/posts.interface'
 import { ComponentPropsType } from '../../shared/types/ui'
 import { debounce, getLastPageFromLinks } from '../../utils'
+import { request } from '../../utils/request.util'
+import { API_URL_POST } from '../../app/constant/api'
 
 const ContainerHomePage: FC<ComponentPropsType> = ({ className }) => {
 	const [posts, setPosts] = useState<IPostsDataWithCommentCount[]>([])
-	const post = useAppSelector(state => state.post)
 	const [page, setPage] = useState<number>(1)
 	const [lastPage, setLastPage] = useState<number>(1)
 	const [shouldSearch, setShouldSearch] = useState<boolean>(false)
 	const [searchPhrase, setSearchPhrase] = useState('')
-	const requestServer = useServerRequest()
 
 	useEffect(() => {
 		const fetchPostsAsync = async (): Promise<void> => {
 			try {
-				const responsePost = await requestServer(
-					'fetchPosts',
-					searchPhrase,
-					post.id,
-					page,
-					PAGINATION_LIMIT
-				)
-
-				if (responsePost?.error) {
-					return
-				}
-
-				const { posts, links } = responsePost.res
-
-				setPosts(posts)
-				setLastPage(getLastPageFromLinks(links))
+				await request(`${API_URL_POST}?search=${searchPhrase}&page=${page}&limit=${PAGINATION_LIMIT}`).then(({ data: { posts, lastPage } }) => {
+								setPosts(posts)
+								setLastPage(getLastPageFromLinks(lastPage))
+							})
 			} catch (error) {
 				if (error instanceof Error) {
 					console.error(error.message)
@@ -45,9 +31,8 @@ const ContainerHomePage: FC<ComponentPropsType> = ({ className }) => {
 				}
 			}
 		}
-
 		fetchPostsAsync()
-	}, [page, shouldSearch, requestServer])
+	}, [page, shouldSearch])
 
 	const startDelayedSearch = useMemo(() => debounce(setShouldSearch, 1500), [])
 
@@ -70,13 +55,13 @@ const ContainerHomePage: FC<ComponentPropsType> = ({ className }) => {
 			{posts.length > 0 ? (
 				<div className='post-list'>
 					{postsFiltered.map(
-						({ id, title, publishedAt, commentsCount, imageUrl }) => (
+						({ id, title, publishedAt, comments, imageUrl }) => (
 							<PostCard
 								key={id}
 								id={id}
 								title={title}
 								publishedAt={publishedAt}
-								commentsCount={commentsCount}
+								commentsCount={comments.length}
 								imageUrl={imageUrl}
 							/>
 						)

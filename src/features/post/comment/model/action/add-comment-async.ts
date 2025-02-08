@@ -1,29 +1,27 @@
 import { Dispatch } from 'redux'
-import { setPostData } from '../../../../../entities/post/model/current-post/actions/set-post-data'
-import { TRequestServerHandler } from '../../../../../entities/users/types/api/fetch-users-method.interface'
 import { ActionRoot } from '../../../../../shared/types/store/action-root'
+import { request } from '../../../../../utils/request.util'
+import { API_URL_POST } from '../../../../../app/constant/api'
+import { addCommentAction } from '../../../../../entities/post/model/current-post/actions/add-comment.action'
 
 export const addCommentAsync =
 	(
-		requestServer: TRequestServerHandler,
-		userId: string | number,
 		postId: string | number,
 		content: string
 	) =>
 	async (dispatch: Dispatch<ActionRoot>) => {
 		try {
-			const postData = await requestServer(
-				'addComment',
-				userId,
-				postId,
+			await request(
+				`${API_URL_POST}/${postId}comments`,
+				'POST',
 				content
-			)
-
-			if (postData && postData.res) {
-				dispatch(setPostData(postData.res))
+			).then(comment => {
+				if (comment && comment.data) {
+				dispatch(addCommentAction(comment.data))
 			} else {
-				console.error('Failed to fetch post data:', postData?.error)
+				console.error('Failed to fetch post data:', comment?.error)
 			}
+			})
 		} catch (error) {
 			if (error instanceof Error) {
 				console.error(error.message)
