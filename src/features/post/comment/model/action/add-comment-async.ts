@@ -12,9 +12,9 @@ export const addCommentAsync =
 	async (dispatch: Dispatch<ActionRoot>) => {
 		try {
 			await request(
-				`${API_URL_POST}/${postId}comments`,
+				`${API_URL_POST}/${postId}/comments`,
 				'POST',
-				content
+				{ content }
 			).then(comment => {
 				if (comment && comment.data) {
 				dispatch(addCommentAction(comment.data))

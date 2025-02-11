@@ -12,7 +12,6 @@ import { IComponentPostFormProps } from '../../entities/post/types/ui/post-ui.in
 import { savePostAsync } from '../../features/post/edit-post/index.export'
 import { SpecialPanel } from '../../features/post/ui/SpecialPanel'
 import { useAppDispatch } from '../../shared/hooks/store'
-import { useServerRequest } from '../../shared/hooks/useServerRequest'
 import { Input } from '../../shared/ui'
 import { sanitizeContent } from '../../utils'
 
@@ -31,7 +30,6 @@ const PostFormContainer: FC<IComponentPostFormProps> = ({
 
 	const dispatch = useAppDispatch()
 	const navigate = useNavigate()
-	const requestServer = useServerRequest()
 
 	const saveHandler = () => {
 		if (!contentRef.current) {
@@ -41,15 +39,14 @@ const PostFormContainer: FC<IComponentPostFormProps> = ({
 		const newContent = sanitizeContent(contentRef.current.innerHTML)
 
 		dispatch(
-			savePostAsync(requestServer, {
-				id,
+			savePostAsync(id, {
 				imageUrl: imageUrlValue,
 				title: titleValue,
 				content: newContent,
 			})
-		).then(({ res }) => {
-			if (res?.id) {
-				navigate(`/post/${res.id}`)
+		).then(({ data }) => {
+			if (data && data.id) {
+				navigate(`/post/${data.id}`)
 			} else {
 				console.error('Failed to save post:')
 			}
@@ -64,7 +61,7 @@ const PostFormContainer: FC<IComponentPostFormProps> = ({
 	return (
 		<div className={className}>
 			<Input
-				placeholder='Изображение...'
+				placeholder='Изображение только по url...'
 				style={{ padding: '15px 0 15px 5px', marginBottom: '20px' }}
 				value={imageUrlValue}
 				onChange={imageChangeInputHandler}

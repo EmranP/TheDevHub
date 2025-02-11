@@ -1,9 +1,10 @@
 import { Save, Trash2 } from 'lucide-react'
 import { ChangeEvent, FC, useState } from 'react'
 import styled from 'styled-components'
-import { useServerRequest } from '../../../shared/hooks/useServerRequest'
 import { UserRowProps } from '../types/ui/user-row.interface'
 import { TableRow } from './table-row'
+import { request } from '../../../utils/request.util'
+import { API_URL_USERS } from '../../../app/constant/api'
 
 const UserContainerRow: FC<UserRowProps> = ({
 	className,
@@ -21,16 +22,14 @@ const UserContainerRow: FC<UserRowProps> = ({
 		userRoleId
 	)
 
-	const requestServer = useServerRequest()
-
 	const onRoleChange = (e: ChangeEvent<HTMLSelectElement>) =>
 		setSelectedRoleId(Number(e.target.value))
 
 	const saveRoleHandler = (
 		userId: number | null,
-		newUserRoleId: string | number
+		newUserRoleId: string | numbe
 	) => {
-		requestServer('updateUserRole', userId, newUserRoleId).then(() => {
+		request(`${API_URL_USERS}/${userId}`, "PATCH", {roleId: newUserRoleId}).then(() => {
 			setInitialRoleId(newUserRoleId)
 		})
 	}

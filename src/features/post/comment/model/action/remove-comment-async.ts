@@ -1,23 +1,21 @@
 import { Dispatch } from 'react'
-import { setPostData } from '../../../../../entities/post/model/current-post/actions/set-post-data'
-import { TRequestServerHandler } from '../../../../../entities/users/types/api/fetch-users-method.interface'
 import { ActionRoot } from '../../../../../shared/types/store/action-root'
+import { request } from '../../../../../utils/request.util'
+import { API_URL_POST } from '../../../../../app/constant/api'
+import { removeComment } from '../../../../../entities/post/model/current-post/actions/remove-comment.action'
 
 export const removeCommentAsync =
 	(
-		requestServer: TRequestServerHandler,
 		postId: string | number,
 		id: string | number
 	) =>
 	async (dispatch: Dispatch<ActionRoot>) => {
 		try {
-			const postData = await requestServer('removeComment', postId, id)
-
-			if (postData && postData.res) {
-				dispatch(setPostData(postData.res))
-			} else {
-				console.error('Failed to fetch post data:', postData?.error)
-			}
+			await request(`${API_URL_POST}/${postId}/comments/${id}`, 'DELETE').then(() => {
+				if (postId || id) {
+					dispatch(removeComment(id))
+				}
+			})
 		} catch (error) {
 			if (error instanceof Error) {
 				console.error(error.message)

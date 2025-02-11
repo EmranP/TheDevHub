@@ -18,6 +18,7 @@ export const Blog: FC = () => {
 			setUser({ ...currentUserData, roleId: Number(currentUserData.roleId) })
 		)
 	}, [dispatch])
+
 	return (
 		<Wrapper>
 			<Header />

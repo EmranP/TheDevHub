@@ -50,7 +50,6 @@ export const Login: FC = () => {
 				setErrorAuth(`Ошибка запроса: ${error}`)
 				return
 			}
-			console.log(user)
 			reset()
 			navigate('/')
 

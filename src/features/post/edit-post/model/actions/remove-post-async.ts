@@ -1,5 +1,6 @@
-import { TRequestServerHandler } from '../../../../../entities/users/types/api/fetch-users-method.interface'
+import { API_URL_POST } from "../../../../../app/constant/api";
+import { request } from "../../../../../utils/request.util";
 
 export const removePostAsync =
-	(requestServer: TRequestServerHandler, id: string | number) => () =>
-		requestServer('removePost', id)
+	(id: string | number) => () =>
+		request(`${API_URL_POST}/${id}`, 'DELETE')

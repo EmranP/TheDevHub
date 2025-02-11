@@ -1,15 +1,16 @@
 import { FC, useEffect, useState } from 'react'
+import { API_URL_USERS } from '../../app/constant/api'
 import { ROLE } from '../../app/constant/role'
 import { fetchUsersMethod } from '../../entities/users/model/api/fetch-users-method'
 import { TableRow } from '../../entities/users/ui/table-row'
 import { UserRow } from '../../entities/users/ui/user-row'
 import { useAppSelector } from '../../shared/hooks/store'
-import { useServerRequest } from '../../shared/hooks/useServerRequest'
 import { Roles } from '../../shared/types/db/roles.interface'
 import { UserTransform } from '../../shared/types/db/user.interface'
 import { Container } from '../../shared/ui/Container'
 import { Title } from '../../shared/ui/Title'
 import { checkAccess } from '../../utils'
+import { request } from '../../utils/request.util'
 import { PrivateContent } from '../../widgets/content/components/PrivateContent'
 
 export const Users: FC = () => {
@@ -20,24 +21,26 @@ export const Users: FC = () => {
 		useState<boolean>(false)
 	const userRole = useAppSelector(state => state.user.roleId)
 
-	const requestServer = useServerRequest()
+	const promptRemoveUser = () => confirm('Are you sure to remove user ?')
 
 	useEffect(() => {
 		if (!checkAccess([ROLE.ADMIN], userRole)) {
 			return
 		}
 
-		fetchUsersMethod(requestServer, setErrorMessage, setUsers, setRoles)
-	}, [requestServer, shouldUpdateUserList, userRole])
+		fetchUsersMethod(setErrorMessage, setUsers, setRoles)
+	}, [shouldUpdateUserList, userRole])
 
 	const userRemoveHandler = (userId: number | string) => {
 		if (!checkAccess([ROLE.ADMIN], userRole)) {
 			return
 		}
 
-		requestServer('removeUser', userId).then(() => {
-			setShouldUpdateUserList(!shouldUpdateUserList)
-		})
+		if (promptRemoveUser()) {
+			request(`${API_URL_USERS}/${userId}`, 'DELETE').then(() => {
+				setShouldUpdateUserList(prev => !prev)
+			})
+		}
 	}
 
 	return (

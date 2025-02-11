@@ -1,15 +1,15 @@
+import { API_URL_ROLES, API_URL_USERS } from '../../../../app/constant/api'
 import { RequestResult } from '../../../../features/auth/types/operations/server'
 import { Roles } from '../../../../shared/types/db/roles.interface'
 import { UserTransform } from '../../../../shared/types/db/user.interface'
+import { request } from '../../../../utils/request.util'
 import {
-	TRequestServerHandler,
 	TSetErrorMessageHandler,
 	TSetRolesHandler,
 	TSetUsersHandler,
 } from '../../types/api/fetch-users-method.interface'
 
 export const fetchUsersMethod = async (
-	requestServer: TRequestServerHandler,
 	setErrorMessage: TSetErrorMessageHandler,
 	setUsers: TSetUsersHandler,
 	setRoles: TSetRolesHandler
@@ -19,8 +19,8 @@ export const fetchUsersMethod = async (
 			RequestResult<UserTransform[]>,
 			RequestResult<Roles[]>
 		] = (await Promise.all([
-			requestServer('fetchUsers', null),
-			requestServer('fetchRoles', null),
+			request(API_URL_USERS),
+			request(API_URL_ROLES),
 		])) as [RequestResult<UserTransform[]>, RequestResult<Roles[]>]
 
 		if (usersRes.error || rolesRes.error) {
@@ -28,8 +28,8 @@ export const fetchUsersMethod = async (
 			return
 		}
 
-		setUsers(usersRes.res)
-		setRoles(rolesRes.res)
+		setUsers(usersRes.data)
+		setRoles(rolesRes.dataRoles)
 	} catch (error) {
 		setErrorMessage((error as Error).message)
 	}
