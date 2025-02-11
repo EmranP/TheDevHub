@@ -1,7 +1,10 @@
-export const request = <T>(url:string, method: string = 'GET', data?: T): Promise<T> => fetch(url, {
-  headers: {
-    'Content-Type': 'application/json'
-  },
-  method: method,
-  body: data ? JSON.stringify(data) : undefined
-}).then(res => res.json())
+export function request(url:string , method: string, data?: any) {
+  return fetch(url, {
+    headers: {
+      'content-type': 'application/json'
+    },
+    method: method || 'GET',
+    body: data ? JSON.stringify(data) : undefined,
+    credentials: 'include',
+  }).then(res => res.json())
+}

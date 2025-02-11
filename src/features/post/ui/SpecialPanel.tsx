@@ -5,7 +5,6 @@ import styled from 'styled-components'
 import { ROLE } from '../../../app/constant/role'
 import { IComponentSpecialPanelProps } from '../../../entities/post/types/ui/post-ui.interface'
 import { useAppDispatch, useAppSelector } from '../../../shared/hooks/store'
-import { useServerRequest } from '../../../shared/hooks/useServerRequest'
 import { checkAccess } from '../../../utils'
 import { CLOSE_MODAL, openModal } from '../comment/index.export'
 import { removePostAsync } from '../edit-post/index.export'
@@ -19,14 +18,13 @@ const SpecialPanelContainer: FC<IComponentSpecialPanelProps> = ({
 	const userRole = useAppSelector(state => state.user.roleId)
 	const dispatch = useAppDispatch()
 	const navigate = useNavigate()
-	const requestServer = useServerRequest()
 
 	const postRemoveHandler = (id: number | string) => {
 		dispatch(
 			openModal({
 				text: 'Удалить статью?',
 				onConfirm: () => {
-					dispatch(removePostAsync(requestServer, id)).then(() => navigate('/'))
+					dispatch(removePostAsync(id)).then(() => navigate('/'))
 					dispatch(CLOSE_MODAL)
 				},
 				onCancel: () => dispatch(CLOSE_MODAL),
